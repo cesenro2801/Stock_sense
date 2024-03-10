@@ -19,18 +19,18 @@ yarn dev
 
 ## Instalacion dependencias
 ```
-yarn i react-icons
-yarn i styled-components
-yarn i react-hook-form
-yarn i react-router-dom
-yarn i sweetalert2
-yarn i zustand 
-yarn i @tanstack/react-query
-yarn i @tanstack/react-table
-yarn i @tanstack/react-query-devtools
-yarn i @supabase/supabase-js
-yarn i react-spinners
-yarn i react-lottie
-yarn i react-color
+yarn add react-icons
+yarn add styled-components
+yarn add react-hook-form
+yarn add react-router-dom
+yarn add sweetalert2
+yarn add zustand 
+yarn add @tanstack/react-query
+yarn add @tanstack/react-table
+yarn add @tanstack/react-query-devtools
+yarn add @supabase/supabase-js
+yarn add react-spinners
+yarn add react-lottie
+yarn add react-color
 ```
 
