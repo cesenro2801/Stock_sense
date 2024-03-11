@@ -22,5 +22,13 @@ export const AuthContextProvider = ({children}) => {
             authListener.subscribe();
         }
 },[])
+    return (
+        <AuthContext.Provider value={{user}}>
+            {children}
+        </AuthContext.Provider>
+    )
+}
+export const useAuth = () => {
+    return useContext(AuthContext);
 }
 
