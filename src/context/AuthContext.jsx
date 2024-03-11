@@ -14,13 +14,13 @@ export const AuthContextProvider = ({children}) => {
             if(session?.user==null){
                 setUser(null); // si no hay usuario, el estado user es null
             } else {
-                setUser(sesion?.user) // guardamos los datos del usuario en el estado user
+                setUser(session?.user) // guardamos los datos del usuario en el estado user
             }
          }
-        })
-        return () => {
-            authListener.subscribe();
+         return () => {
+            authListener.unsubscribe();
         }
+        })
 },[])
     return (
         <AuthContext.Provider value={{user}}>
