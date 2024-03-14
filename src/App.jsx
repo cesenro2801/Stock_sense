@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './App.css'
-import {} from "./index";
+import { MyRoutes } from "./index";
 import { AuthContextProvider } from './context/AuthContext';
 
 function App() {
@@ -9,10 +9,7 @@ function App() {
   return (
     <>
      <AuthContextProvider>
-        <h1>Counter: {count}</h1>
-        <button onClick={() => setCount(count + 1)}>Increment</button>
-        <button onClick={() => setCount(count - 1)}>Decrement</button>
-        <button onClick={() => setCount(0)}>Reset</button>
+        <MyRoutes />
       </AuthContextProvider>
     </>
   )
