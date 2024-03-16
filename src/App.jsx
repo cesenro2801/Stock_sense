@@ -37,8 +37,8 @@ function App() {
 }
 
 const Container = styled.main`
-  display: grid;
-  grid-template-columns: 1fr;
+  display: grid; //es para que el display se vea en una sola columna
+  grid-template-columns: 1fr; // es para que el sidebar ocupe el 100% del ancho
   background-color: ${({ theme }) => theme.bgtotal};
   .ContentSidebar {
     display: none;
