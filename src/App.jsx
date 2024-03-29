@@ -1,3 +1,4 @@
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import styled, { ThemeProvider } from "styled-components";
 import { AuthContextProvider, MyRoutes, Light, Dark, Sidebar, MenuHambur } from "./index";
 
@@ -24,6 +25,7 @@ function App() {
                 <MyRoutes />
               </section>
             </Container>
+            <ReactQueryDevtools initialIsOpen={false} />
           </AuthContextProvider>
         </ThemeProvider>
       </ThemeContext.Provider>
