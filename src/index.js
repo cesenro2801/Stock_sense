@@ -1,6 +1,8 @@
 export { default as App } from './App';
+export * from './components/agencies/FooterLogin';
 export * from './components/agencies/MenuHambur';
 export * from './components/agencies/ToggleTema';
+export * from './components/agencies/formularios/InputText';
 export * from './components/agencies/sidebar/Sidebar';
 export * from './components/agencies/sidebar/SidebarCard';
 export * from './components/atomos/Icono';
