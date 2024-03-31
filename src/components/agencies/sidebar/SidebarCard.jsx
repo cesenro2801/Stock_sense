@@ -70,4 +70,4 @@ const Container = styled.div`
       margin-left:-8px;
     }
   }
-`;
+`
