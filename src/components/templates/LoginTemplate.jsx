@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Btnsave, v, useAuthStore, InputText, FooterLogin } from "../../index";
+import { Btnsave, v, useAuthStore, InputText, FooterLogin, RegistrarAdmin } from "../../index";
 import { Device } from "../../styles/breackpoints";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -39,9 +39,12 @@ export function LoginTemplate() {
 
       <div className="contentCard">
         <div className="card">
+        {
+          state && <RegistrarAdmin setState={()=>setState(!state)}/>
+        }
           <Titulo>StockSence</Titulo>
           {stateInicio && (
-            <TextoStateInicio>datos incorrectos</TextoStateInicio>
+            <TextoStateInicio>Datos incorrectos</TextoStateInicio>
           )}
           <span className="ayuda">
             {" "}
@@ -75,7 +78,7 @@ export function LoginTemplate() {
               {errors.pass?.type === "required" && <p>Campo requerido</p>}
             </InputText>
             <ContainerBtn>
-              <Btnsave titulo="Iniciar" bgcolor="#fc6b32" />
+              <Btnsave titulo="Iniciar sesión" bgcolor="#fc6b32" />
               <Btnsave
                 funcion={() => setState(!state)}
                 titulo="Crear cuenta"
