@@ -1,22 +1,51 @@
 import styled from "styled-components";
-import {Btnsave, useAuthStore} from "../../index"
+import { BannerEmpresa, Header, Title } from "../../index";
+import { useState } from "react";
 export function HomeTemplate() {
-  const {signOut} = useAuthStore();
+  const [state, setState] = useState(false);
   return (
     <Container>
-      <h1>Home template</h1>
-      <Btnsave titulo="Cerrar sesión" 
-      bgcolor="#fff" funcion={signOut}/>
+      <header className="header">
+        <Header
+          stateConfig={{state: state, setState:() => setState(!state) }}
+        />
+      </header>
+      <section className="area1">
+        <Title>Tu empresa</Title>
+      </section>
+      <section className="main">
+        <BannerEmpresa/>
+      </section>
     </Container>
   );
 }
 const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  position: relative;
   overflow: hidden;
+  height: 100vh;
+  width: 100%;
   background-color: ${(props) => props.theme.bgtotal};
   color: ${({ theme }) => theme.text};
-  width: 100%;
+  display: grid;
+  grid-template:
+  "header" 100px
+  "area1" 100px
+  "main" auto
+  ;
+  .header{
+    grid-area: header;
+    /* background-color: rgba(103, 93, 241, 0.14); */
+  }
+  .area1{
+    grid-area: area1;
+    /* background-color: rgba(14, 56, 254, 0.14); */
+    display: flex;
+    align-items: center;
+    justify-content: end;
+  }
+  .main{
+    grid-area: main;
+    /* background-color: rgba(96, 93, 241, 0.14); */
+  }
 `;
+
