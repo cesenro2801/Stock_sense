@@ -7,7 +7,7 @@ export const MyRoutes = () => {
   const {mostrarUsuarios, idusuario}= useUsuariosStore();
   const {mostrarEmpresa}=useEmpresaStore();
   const {data:datausuarios, isLoading, error} = useQuery({queryKey:["mostrar usuarios"], queryFn:mostrarUsuarios});
-  const {data:dataempresa}=useQuery({queryKey:["mostrar empresa"],queryFn:()=>mostrarEmpresa({idusuario:idusuario}),enabled:!!datausuarios})
+  const {data:dataempresa}=useQuery({queryKey:["mostrar empresa"],queryFn:()=>mostrarEmpresa({idusaurio:idusuario}),enabled:!!datausuarios})
   if(isLoading){
     return <SpinnerLoader/>
   }

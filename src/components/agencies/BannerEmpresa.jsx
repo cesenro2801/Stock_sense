@@ -1,20 +1,21 @@
 import styled from "styled-components";
 import { v } from "../../styles/variables";
 import { CardDatosEmpresa } from "../molecules/CardDatosEmpresa";
+import { useEmpresaStore } from "../../store/EmpresaStore";
 export function BannerEmpresa(){
+    const {dataempresa, contadorusuarios} = useEmpresaStore();
     return(<Container>
         <div className="content-wrapper-context">
             <span className="titulo">
                 {<v.iconoempresa/>}
-                Nombre de empresa
+                {dataempresa.empresa?.nombre}
             </span>
             <div className="content-text">
                 StockSense te mantiene siempre informado
             </div>
             <ContentCards>
-                <CardDatosEmpresa titulo="Moneda" valor="$/"/>
-                <CardDatosEmpresa titulo="Usuarios" valor="1"/>
-
+                <CardDatosEmpresa titulo="Moneda" valor={dataempresa.empresa?.simbolomoneda} />
+                <CardDatosEmpresa titulo="Usuarios" valor={contadorusuarios}/>
             </ContentCards>
         </div>
         <div className="contentsvg">
