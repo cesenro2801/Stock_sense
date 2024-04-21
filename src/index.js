@@ -31,6 +31,7 @@ export * from './pages/Marca';
 export * from './routes/routes';
 export * from './store/AuthStore';
 export * from './store/EmpresaStore';
+export * from './store/MarcaStore';
 export * from './store/UsuariosStore';
 export * from './styles/breackpoints';
 export * from './styles/themes';
