@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import { MarcaTemplate, SpinnerLoader, useMarcaStore } from "../index";
+import { MarcaTemplate, SpinnerLoader, useMarcaStore, useEmpresaStore  } from "../index";
 export function Marca() {
-    const {mostrarMarca, datamarca, buscarMarca} = useMarcaStore();
+    const {mostrarMarca, datamarca, buscarMarca, buscador} = useMarcaStore();
+    const {dataempresa} = useEmpresaStore();
     const {isLoading, error} = useQuery(
     {queryKey:["mostrar marca",{id_empresa:dataempresa.id}],
     queryFn:()=>mostrarMarca({id_empresa:dataempresa.id }), enabled:dataempresa.id!=null

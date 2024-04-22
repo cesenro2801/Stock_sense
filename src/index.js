@@ -20,6 +20,7 @@ export * from './components/templates/HomeTemplate';
 export * from './components/templates/LoginTemplate';
 export * from './components/templates/ConfiguracionTemplate';
 export * from './components/templates/MarcaTemplate';
+export * from './components/tables/TablaMarca';
 export * from './context/AuthContext';
 export * from './hooks/ProtectedRoute';
 export * from './main';
