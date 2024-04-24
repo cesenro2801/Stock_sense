@@ -1,16 +1,34 @@
 import styled from "styled-components";
-import { Header, TablaMarca } from "../../index";
+import { Header, TablaMarca, RegistrarMarca, ContentFiltro, Title, BtnFiltro, v } from "../../index";
 import { useState } from "react";
+
 export function MarcaTemplate({data}) {
   const [state, setState] = useState(false);
+  const [dataSelect, setdataSelect] = useState("");
+  const [accion, setAccion] = useState("");
+  const [openRegistro, SetopenRegistro] = useState(false);
   return (
     <Container>
+      {
+        openRegistro && <RegistrarMarca dataSelect={dataSelect} accion={accion}
+        onClose={() => SetopenRegistro(!openRegistro)} />
+      }
       <header className="header">
         <Header
           stateConfig={{ state: state, setState: () => setState(!state) }}
         />
       </header>
-      <section className="area1"></section>
+      <section className="area1">
+        <ContentFiltro>
+          <Title>
+            Marcas
+          </Title>
+          <BtnFiltro bgcolor="#f6f3f3"
+          textcolor="#353535"
+          icono={<v.agregar />}
+          />
+        </ContentFiltro>
+      </section>
       <section className="area2"></section>
       <section className="main">
       <TablaMarca data={data}/>
@@ -53,4 +71,5 @@ const Container = styled.div`
     grid-area: main;
     background-color: rgba(179, 46, 241, 0.14);
   }
+  
 `;

@@ -1,5 +1,10 @@
 import { create } from "zustand";
-import { InsertarMarca, MostrarMarca } from "../supabase/crudMarca";
+import { 
+    InsertarMarca, 
+    MostrarMarca, 
+    EliminarMarca, 
+    BuscarMarca, 
+    EditarMarca, } from "../supabase/crudMarca";
 
 export const useMarcaStore = create((set, get) => ({
     buscador: "",
@@ -24,7 +29,7 @@ export const useMarcaStore = create((set, get) => ({
         set(mostrarMarca(parametros))
     },
     eliminarMarca: async (p) => {
-        await EliminarMarca();
+        await EliminarMarca(p);
         const {mostrarMarca}= get();
         const {parametros}= get();
         set(mostrarMarca(parametros));
