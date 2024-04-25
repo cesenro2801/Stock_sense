@@ -1,18 +1,23 @@
 import styled from "styled-components";
-import { Header, TablaMarca, RegistrarMarca, ContentFiltro, Title, BtnFiltro, v } from "../../index";
+import { BtnFiltro, Buscador, ContentFiltro, Header, RegistrarMarca, TablaMarca, Title,useMarcaStore,v } from "../../index";
 import { useState } from "react";
-
 export function MarcaTemplate({data}) {
   const [state, setState] = useState(false);
-  const [dataSelect, setdataSelect] = useState("");
+  const [dataSelect, setdataSelect] = useState([]);
   const [accion, setAccion] = useState("");
   const [openRegistro, SetopenRegistro] = useState(false);
+  const nuevoRegistro=()=>{
+    SetopenRegistro(!openRegistro);
+    setAccion("Nuevo")
+    setdataSelect([])
+  }
+  const {setBuscador} = useMarcaStore()
   return (
     <Container>
       {
-        openRegistro && <RegistrarMarca dataSelect={dataSelect} accion={accion}
-        onClose={() => SetopenRegistro(!openRegistro)} />
+        openRegistro &&  <RegistrarMarca dataSelect={dataSelect} accion={accion} onClose={()=>SetopenRegistro(!openRegistro)}/>
       }
+     
       <header className="header">
         <Header
           stateConfig={{ state: state, setState: () => setState(!state) }}
@@ -23,16 +28,18 @@ export function MarcaTemplate({data}) {
           <Title>
             Marcas
           </Title>
-          <BtnFiltro bgcolor="#f6f3f3"
-          textcolor="#353535"
-          icono={<v.agregar />}
-          />
+           <BtnFiltro funcion={nuevoRegistro} bgcolor="#f6f3f3"
+            textcolor="#353535"
+            icono={<v.agregar/>}/>
         </ContentFiltro>
+       
       </section>
-      <section className="area2"></section>
+      <section className="area2">
+        <Buscador setBuscador={setBuscador}/>
+      </section>
       <section className="main">
-      <TablaMarca data={data}/>
-
+        <TablaMarca data={data} SetopenRegistro={SetopenRegistro}
+        setdataSelect={setdataSelect} setAccion={setAccion}/>
       </section>
     </Container>
   );
@@ -51,25 +58,25 @@ const Container = styled.div`
     "main" auto;
   .header {
     grid-area: header;
-    background-color: rgba(103, 93, 241, 0.14);
+    /* background-color: rgba(103, 93, 241, 0.14); */
     display: flex;
     align-items: center;
   }
   .area1 {
     grid-area: area1;
-    background-color: rgba(229, 67, 26, 0.14);
+    /* background-color: rgba(229, 67, 26, 0.14); */
     display: flex;
     align-items: center;
   }
   .area2 {
     grid-area: area2;
-    background-color: rgba(77, 237, 106, 0.14);
+    /* background-color: rgba(77, 237, 106, 0.14); */
     display: flex;
     align-items: center;
+    justify-content:end;
   }
   .main {
     grid-area: main;
-    background-color: rgba(179, 46, 241, 0.14);
+    /* background-color: rgba(179, 46, 241, 0.14); */
   }
-  
 `;

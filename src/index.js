@@ -10,6 +10,7 @@ export * from './components/agencies/formularios/RegistrarAdmin';
 export * from './components/agencies/formularios/RegistrarMarca';
 export * from './components/agencies/sidebar/Sidebar';
 export * from './components/agencies/sidebar/SidebarCard';
+export * from './components/agencies/Buscador';
 export * from './components/atomos/Icono';
 export * from './components/atomos/Title';
 export * from './components/atomos/AccionTabla';
