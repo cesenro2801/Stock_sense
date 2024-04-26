@@ -33,7 +33,6 @@ export function ConfiguracionTemplate() {
 const Container = styled.div`
   --bg-color: rgb(20, 20, 20);
   --card-color: rgb(23, 23, 23);
-  background-image: url(${fondocuadros});
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat, repeat;
@@ -66,7 +65,7 @@ const Container = styled.div`
 
   .card {
     background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
+    border-radius: 20px;
     cursor: pointer;
     display: flex;
     height: 260px;
