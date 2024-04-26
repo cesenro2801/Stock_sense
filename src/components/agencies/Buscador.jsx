@@ -5,6 +5,7 @@ export function Buscador({setBuscador}) {
     const buscar =(e)=>{
         setBuscador(e.target.value)
     }
+    
   return (
     <Container>
       <article className="content">
