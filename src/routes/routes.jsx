@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { ErrorMolecula, Home, Login, ProtectedRoute, SpinnerLoader, UserAuth, useEmpresaStore, useUsuariosStore } from "../index";
+import { ErrorMolecula, Home, Login, Configuracion, Marca, ProtectedRoute, SpinnerLoader, UserAuth, useEmpresaStore, useUsuariosStore } from "../index";
 import { useQuery } from "@tanstack/react-query";
 
 export const MyRoutes = () => {
@@ -21,6 +21,8 @@ export const MyRoutes = () => {
           element={<ProtectedRoute user = {user} redirectTo="/login"/>}
           >
               <Route path="/" element={<Home />} />
+              <Route path="/configurar" element={<Configuracion />} />
+              <Route path="/configurar/marca" element={<Marca />} />
           </Route>
         </Routes>
   );
