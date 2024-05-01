@@ -11,7 +11,8 @@ import { NavLink } from "react-router-dom";
 export function Sidebar({ state, setState }) {
 
   return (
-    <Main $isopen={state.toString()}>
+    // el metodo toString convierte el valor booleano en string e interactuar con el css
+    <Main $isopen={state.toString()}>  
       <span className="Sidebarbutton" onClick={() => setState(!state)}>
         {<v.iconoflechaderecha />}
       </span>

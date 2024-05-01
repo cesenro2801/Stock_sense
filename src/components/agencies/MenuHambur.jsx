@@ -84,7 +84,6 @@ const HamburgerMenu = styled.span`
       transition-duration: 0.5s;
       transform: rotate(180deg);
       .bars {
-        
         position: absolute;
         transition-duration: 0.5s;
       }

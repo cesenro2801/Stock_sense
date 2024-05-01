@@ -80,7 +80,7 @@ export function RegistrarAdmin({ setState }) {
                   required: true,
                 })}
               />
- <label className="form__label">Pass</label>
+ <label className="form__label">Contraseña</label>
               {errors.pass?.type === "required" && <p>Campo requerido</p>}
             </InputText>
           </article>
