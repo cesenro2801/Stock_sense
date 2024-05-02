@@ -42,7 +42,7 @@ export function LoginTemplate() {
         {
           state && <RegistrarAdmin setState={()=>setState(!state)}/>
         }
-          <Titulo>StockSence</Titulo>
+          <Titulo>StockSense</Titulo>
           {stateInicio && (
             <TextoStateInicio>Datos incorrectos</TextoStateInicio>
           )}
