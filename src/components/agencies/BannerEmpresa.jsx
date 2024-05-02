@@ -37,6 +37,7 @@ const Container =styled.div`
     background-repeat: no-repeat, repeat;
     border-radius: 14px;
     overflow: hidden;
+    margin-top:10px;
     
 `;
 const ContentCards =styled.div`
