@@ -89,6 +89,7 @@ export const DataModulosConfiguracion = [
     icono: "https://i.ibb.co/1zM6742/marca1.png",
     link: "/configurar/marca",
   },
+  
 ];
 //tipo usuario
 export const TipouserData = [
