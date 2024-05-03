@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import {
-  
   LinksArray,
   SecondarylinksArray,
   SidebarCard,
@@ -60,7 +59,7 @@ export function Sidebar({ state, setState }) {
         ))}
         <ToggleTema/>
         <Divider />
-        {state && <SidebarCard />}
+        
       </Container>
     </Main>
   );
