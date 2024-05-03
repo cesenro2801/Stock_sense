@@ -20,11 +20,15 @@ z-index: 1;
     width:190px;
     background: #fffefe;
     padding: 1rem;
+    
     border-radius: 1rem;
     border: 0.5vmin solid #05060f;
     box-shadow: 0.4rem 0.4rem #05060f;
     overflow: hidden;
     color: black;
+    justify-content: center;
+    align-items: center;
+    display: flex;
     .pricing-block-content{
         display: flex;
         height: 100%;

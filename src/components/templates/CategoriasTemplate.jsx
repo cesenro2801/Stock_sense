@@ -73,7 +73,7 @@ const Container = styled.div`
     /* background-color: rgba(77, 237, 106, 0.14); */
     display: flex;
     align-items: center;
-    justify-content:end;
+    justify-content:center;
   }
   .main {
     grid-area: main;
