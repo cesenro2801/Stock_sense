@@ -4,7 +4,7 @@ import { useState } from "react";
 export function HomeTemplate() {
   const [state, setState] = useState(false);
   return (
-    <Container>
+    <Container> 
       <header className="header">
         <Header
           stateConfig={{state: state, setState:() => setState(!state) }}
@@ -30,7 +30,7 @@ const Container = styled.div`
   grid-template:
   "header" 100px
   "area1" 100px
-  "main" auto
+  "main" 250px
   ;
   .header{
     grid-area: header;
@@ -41,11 +41,13 @@ const Container = styled.div`
     /* background-color: rgba(14, 56, 254, 0.14); */
     display: flex;
     align-items: center;
-    justify-content: end;
+    justify-content: center;
   }
   .main{
     grid-area: main;
     /* background-color: rgba(96, 93, 241, 0.14); */
+    }
+    
   }
 `;
 

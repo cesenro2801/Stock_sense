@@ -13,7 +13,6 @@ const Container = styled.div`
     min-height: 50px;
     border-radius: 50%;
     background: linear-gradient(145deg, #ffffff, #e6e6e6);
-    box-shadow: 20px 20px 60px #d9d9d9, -20px -20px 60px #ffffff;
     color: ${(props) => props.$textcolor};
     display: flex;
     align-items: center;

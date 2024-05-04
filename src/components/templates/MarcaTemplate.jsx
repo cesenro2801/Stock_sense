@@ -61,19 +61,21 @@ const Container = styled.div`
     /* background-color: rgba(103, 93, 241, 0.14); */
     display: flex;
     align-items: center;
+    
   }
   .area1 {
     grid-area: area1;
     /* background-color: rgba(229, 67, 26, 0.14); */
     display: flex;
     align-items: center;
+    justify-content: center;
   }
   .area2 {
     grid-area: area2;
     /* background-color: rgba(77, 237, 106, 0.14); */
     display: flex;
     align-items: center;
-    justify-content:end;
+    justify-content: center;
   }
   .main {
     grid-area: main;
