@@ -1,13 +1,20 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { v } from "../../../styles/variables";
-import { InputText, Btnsave,ConvertirCapitalize, useProductosStore, ContainerSelector, Selector, useMarcaStore } from "../../../index";
+import { InputText, Btnsave,ConvertirCapitalize, useProductosStore, ContainerSelector, Selector, useMarcaStore, BtnFiltro, RegistrarMarca } from "../../../index";
 import { useForm } from "react-hook-form";
 import { useEmpresaStore } from "../../../store/EmpresaStore";
 export function RegistrarProductos({ onClose, dataSelect, accion }) {
   const { insertarproductos, editarproductos } = useProductosStore();
   const { dataempresa } = useEmpresaStore();
-  const {marcaItemSelect} = useMarcaStore()
+  const {marcaItemSelect} = useMarcaStore();
+  const [stateMarca, setStateMarca] = useState(false);
+  const [openRegistroMarca, SetopenRegistroMarca] = useState(false);
+  const [subaccion, setAccion] = useState("");
+  const nuevoRegistroMarca =()=> {
+    SetopenRegistroMarca(!openRegistroMarca)
+    setAccion("Nuevo")
+  }
   const {
     register,
     formState: { errors },
@@ -70,7 +77,16 @@ export function RegistrarProductos({ onClose, dataSelect, accion }) {
             </article>
             <ContainerSelector>
               <label>Marca: </label>
-              <Selector color="#fc6027" texto1="🍿" texto2={marcaItemSelect?.descripcion}/>
+              <Selector funcion={()=>setStateMarca(!stateMarca)} state={stateMarca}
+                color="#fc6027" 
+                texto1="🍿" 
+                texto2={marcaItemSelect?.descripcion}
+                />
+                <BtnFiltro 
+                  bgcolor="#f6f3f3"
+                  textcolor="#353535"
+                  funcion={nuevoRegistroMarca}
+                  icono={<v.agregar/>}/>
             </ContainerSelector>
 
             <div className="btnguardarContent">
@@ -82,6 +98,9 @@ export function RegistrarProductos({ onClose, dataSelect, accion }) {
             </div>
           </section>
         </form>
+        {
+          openRegistroMarca && (<RegistrarMarca accion={subaccion} onClose={()=>SetopenRegistroMarca(!openRegistroMarca)} dataSelect={dataSelect}/>)
+        }
       </div>
     </Container>
   );
