@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { v } from "../../../styles/variables";
-import { InputText, Btnsave,ConvertirCapitalize, useProductosStore, ContainerSelector, Selector, useMarcaStore, BtnFiltro, RegistrarMarca } from "../../../index";
+import { InputText, Btnsave,ConvertirCapitalize, useProductosStore, ContainerSelector, Selector, useMarcaStore, BtnFiltro, RegistrarMarca, ListaGenerica } from "../../../index";
 import { useForm } from "react-hook-form";
 import { useEmpresaStore } from "../../../store/EmpresaStore";
 export function RegistrarProductos({ onClose, dataSelect, accion }) {
   const { insertarproductos, editarproductos } = useProductosStore();
   const { dataempresa } = useEmpresaStore();
-  const {marcaItemSelect} = useMarcaStore();
+  const { marcaItemSelect, datamarca, selectMarca } = useMarcaStore();
   const [stateMarca, setStateMarca] = useState(false);
   const [openRegistroMarca, SetopenRegistroMarca] = useState(false);
   const [subaccion, setAccion] = useState("");
@@ -82,6 +82,7 @@ export function RegistrarProductos({ onClose, dataSelect, accion }) {
                 texto1="🍿" 
                 texto2={marcaItemSelect?.descripcion}
                 />
+                {stateMarca && (<ListaGenerica setState={()=>setStateMarca(!stateMarca)} bottom="-260px" scroll="scroll" data={datamarca} funcion={selectMarca}/>)}
                 <BtnFiltro 
                   bgcolor="#f6f3f3"
                   textcolor="#353535"
