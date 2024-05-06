@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 import styled from "styled-components";
 import { v } from "../../../styles/variables";
-import { InputText, Btnsave,ConvertirCapitalize, useProductosStore } from "../../../index";
+import { InputText, Btnsave,ConvertirCapitalize, useProductosStore, ContainerSelector, Selector, useMarcaStore } from "../../../index";
 import { useForm } from "react-hook-form";
 import { useEmpresaStore } from "../../../store/EmpresaStore";
 export function RegistrarProductos({ onClose, dataSelect, accion }) {
   const { insertarproductos, editarproductos } = useProductosStore();
   const { dataempresa } = useEmpresaStore();
+  const {marcaItemSelect} = useMarcaStore()
   const {
     register,
     formState: { errors },
@@ -53,7 +54,7 @@ export function RegistrarProductos({ onClose, dataSelect, accion }) {
         <form className="formulario" onSubmit={handleSubmit(insertar)}>
           <section>
             <article>
-              <InputText icono={<v.iconomarca />}>
+              <InputText icono={<v.icononombre />}>
                 <input
                   className="form__field"
                   defaultValue={dataSelect.descripcion}
@@ -63,10 +64,14 @@ export function RegistrarProductos({ onClose, dataSelect, accion }) {
                     required: true,
                   })}
                 />
-                <label className="form__label">Producto</label>
+                <label className="form__label">Descripción</label>
                 {errors.nombre?.type === "required" && <p>Campo requerido</p>}
               </InputText>
             </article>
+            <ContainerSelector>
+              <label>Marca: </label>
+              <Selector color="#fc6027" texto1="🍿" texto2={marcaItemSelect?.descripcion}/>
+            </ContainerSelector>
 
             <div className="btnguardarContent">
               <Btnsave

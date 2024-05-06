@@ -9,6 +9,7 @@ import {
 } from "../index";
 
 export function Productos() {
+  const {mostrarMarca} = useMarcaStore()
   const { mostrarproductos, dataproductos, buscarproductos, buscador } = useProductosStore();
   const { dataempresa } = useEmpresaStore();
   const { isLoading, error } = useQuery({
@@ -24,6 +25,11 @@ export function Productos() {
     queryFn: () =>
       buscarproductos({ id_empresa: dataempresa.id, descripcion: buscador }),
     enabled: dataempresa.id != null,
+  });
+  const { data:datamarcas } = useQuery({
+    queryKey: ["mostrar marca", { id_empresa: dataempresa?.id }],
+    queryFn: () => mostrarMarca({ id_empresa: dataempresa?.id }),
+    enabled: dataempresa?.id != null,
   });
   if (isLoading) {
     return <SpinnerLoader />;
