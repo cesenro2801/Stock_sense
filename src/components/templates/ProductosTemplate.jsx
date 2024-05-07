@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { BtnFiltro, Buscador, ContentFiltro, Header, RegistrarProductos, TablaProductos, Title,useMarcaStore,v } from "../../index";
+import { BtnFiltro, Buscador, ContentFiltro, Header, RegistrarProductos, TablaProductos, Title,useMarcaStore,useProductosStore,v } from "../../index";
 import { useState } from "react";
 export function ProductosTemplate({data}) {
   const [state, setState] = useState(false);
@@ -11,7 +11,7 @@ export function ProductosTemplate({data}) {
     setAccion("Nuevo")
     setdataSelect([])
   }
-  const {setBuscador} = useMarcaStore()
+  const {setBuscador} = useProductosStore()
   return (
     <Container>
       {

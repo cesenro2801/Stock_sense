@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { v } from "../../../styles/variables";
+import {Device} from "../../../styles/breackpoints"
 import { InputText, Btnsave,ConvertirCapitalize, useProductosStore, ContainerSelector, Selector, useMarcaStore, BtnFiltro, RegistrarMarca, ListaGenerica, useCategoriasStore, RegistrarCategorias } from "../../../index";
 import { useForm } from "react-hook-form";
 import { useEmpresaStore } from "../../../store/EmpresaStore";
@@ -32,14 +33,31 @@ export function RegistrarProductos({ onClose, dataSelect, accion }) {
     if (accion === "Editar") {
       const p = {
         id: dataSelect.id,
-        descripcion:ConvertirCapitalize(data.nombre),
+        descripcion:ConvertirCapitalize(data.descripcion),
+        idmarca: marcaItemSelect.id,
+        stock: parseFloat(data.stock),
+        stock_minimo: parseFloat(data.codigointerno),
+        codigobarras: parseFloat(data.codigobarras),
+        codigointerno: data.codigointerno,
+        precioventa: parseFloat(data.precioventa),
+        preciocompra: parseFloat(data.preciocompra),
+        id_categoria: categoriasItemSelect.id,
+        id_empresa: dataempresa.id,
       };
       await editarproductos(p);
       onClose();
     } else {
       const p = {
-        _descripcion:ConvertirCapitalize(data.nombre),
-        _idempresa: dataempresa.id,
+        _descripcion:ConvertirCapitalize(data.descripcion),
+        _idmarca: marcaItemSelect.id,
+        _stock: parseFloat(data.stock),
+        _stock_minimo: parseFloat(data.codigointerno),
+        _codigobarras: parseFloat(data.codigobarras),
+        _codigointerno: data.codigointerno,
+        _precioventa: parseFloat(data.precioventa),
+        _preciocompra: parseFloat(data.preciocompra),
+        _id_categoria: categoriasItemSelect.id,
+        _id_empresa: dataempresa.id,
       };
       await insertarproductos(p);
       onClose();
@@ -48,6 +66,8 @@ export function RegistrarProductos({ onClose, dataSelect, accion }) {
 
   useEffect(() => {
     if (accion === "Editar") {
+      selectMarca({id:dataSelect.idmarca,descripcion:dataSelect.marca})
+      selectcategorias({id:dataSelect.id_categoria,descripcion:dataSelect.categoria})
     }
   }, []);
   return (
@@ -66,7 +86,7 @@ export function RegistrarProductos({ onClose, dataSelect, accion }) {
         </div>
 
         <form className="formulario" onSubmit={handleSubmit(insertar)}>
-          <section>
+          <section className="seccion1">
             <article>
               <InputText icono={<v.icononombre />}>
                 <input
@@ -74,7 +94,7 @@ export function RegistrarProductos({ onClose, dataSelect, accion }) {
                   defaultValue={dataSelect.descripcion}
                   type="text"
                   placeholder=""
-                  {...register("nombre", {
+                  {...register("descripcion", {
                     required: true,
                   })}
                 />
@@ -153,14 +173,78 @@ export function RegistrarProductos({ onClose, dataSelect, accion }) {
                 
             </ContainerSelector>
 
-            <div className="btnguardarContent">
+            
+          </section>
+          <section className="seccion2">
+          <article>
+              <InputText icono={<v.iconocodigobarras />}>
+                <input
+                  className="form__field"
+                  defaultValue={dataSelect.codigobarras}
+                  type="number"
+                  placeholder=""
+                  {...register("codigobarras", {
+                    required: true,
+                  })}
+                />
+                <label className="form__label">Código de barras</label>
+                {errors.codigobarras?.type === "required" && <p>Campo requerido</p>}
+              </InputText>
+            </article>
+            <article>
+              <InputText icono={<v.iconocodigointerno />}>
+                <input
+                  className="form__field"
+                  defaultValue={dataSelect.codigointerno}
+                  type="text"
+                  placeholder=""
+                  {...register("codigointerno", {
+                    required: true,
+                  })}
+                />
+                <label className="form__label">Código interno</label>
+                {errors.codigointerno?.type === "required" && <p>Campo requerido</p>}
+              </InputText>
+            </article>
+            <article>
+              <InputText icono={<v.iconoprecioventa/>}>
+                <input
+                  step="0.01"
+                  className="form__field"
+                  defaultValue={dataSelect.precioventa}
+                  type="number"
+                  placeholder=""
+                  {...register("precioventa", {required: true,})}/>
+                  <label className="form__label">Precio de venta</label>
+                  {errors.precioventa?.type === "required" && (
+                    <p>Campo requerido</p>
+                  )}
+              </InputText>
+            </article>
+            <article>
+              <InputText icono={<v.iconopreciocompra/>}>
+                <input
+                  step="0.01"
+                  className="form__field"
+                  defaultValue={dataSelect.preciocompra}
+                  type="number"
+                  placeholder=""
+                  {...register("preciocompra", {required: true,})}/>
+                  <label className="form__label">Precio de compra</label>
+                  {errors.preciocompra?.type === "required" && (
+                    <p>Campo requerido</p>
+                  )}
+              </InputText>
+            </article>
+          </section>
+          <div className="btnguardarContent">
               <Btnsave
                 icono={<v.iconoguardar />}
                 titulo="Guardar"
                 bgcolor="#ef552b"
               />
             </div>
-          </section>
+
         </form>
         {
           openRegistroMarca && (<RegistrarMarca accion={subaccion} onClose={()=>SetopenRegistroMarca(!openRegistroMarca)} dataSelect={dataSelect}/>)
@@ -186,13 +270,24 @@ const Container = styled.div`
   z-index: 1000;
 
   .sub-contenedor {
-    width: 500px;
-    max-width: 85%;
+    width: 100%;
+    max-width: 90%
     border-radius: 20px;
     background: ${({ theme }) => theme.bgtotal};
     box-shadow: -10px 15px 30px rgba(10, 9, 9, 0.4);
     padding: 13px 36px 20px 36px;
     z-index: 100;
+    height: 90vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    &::-webkit-scrollbar {
+      width: 6px;
+      border-radius: 10px;
+    }
+    &::-webkit-scrollbar {
+      background-color: #484848;
+      border-radius: 10px;
+    }
 
     .headers {
       display: flex;
@@ -210,15 +305,23 @@ const Container = styled.div`
       }
     }
     .formulario {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 15px;
+      @media ${Device.tablet} {
+        grid-template-columns: repeat(2, 1fr);
+      }
       section {
         gap: 20px;
         display: flex;
         flex-direction: column;
-        .colorContainer {
-          .colorPickerContent {
-            padding-top: 15px;
-            min-height: 50px;
-          }
+      }
+      .btnguardarContent {
+        display: flex;
+        justify-content: end;
+        grid-column: 1;
+        @media ${Device.tablet} {
+          grid-columns: 2;
         }
       }
     }

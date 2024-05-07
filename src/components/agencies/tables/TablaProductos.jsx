@@ -7,7 +7,7 @@ import {
   flexRender,
 } from "@tanstack/react-table";
 import styled from "styled-components";
-import { ContentAccionesT, Paginacion, useProductosStore, v } from "../../../index";
+import { Colorcontent, ColorcontentTable, ContentAccionesT, Paginacion, useProductosStore, v } from "../../../index";
 import Swal from "sweetalert2";
 import { FaArrowsAltV } from "react-icons/fa";
 import { useState } from "react";
@@ -61,6 +61,51 @@ export function TablaProductos({
       accessorKey: "descripcion",
       header: "Descripcion",
       cell: (info) => <td data-title="Descripcion" className="ContentCell">
+        <span >{info.getValue()}</span>
+      </td> 
+    },
+    {
+      accessorKey: "stock",
+      header: "Stock",
+      enableSorting:false,
+      cell: (info) => <td data-title="Stock" className="ContentCell">
+        <span >{info.getValue()}</span>
+      </td> 
+    },
+    {
+      accessorKey: "precioventa",
+      header: "P. de venta",
+      enableSorting:false,
+      cell: (info) => <td data-title="P. de venta" className="ContentCell">
+        <span >{info.getValue()}</span>
+      </td> 
+    },
+    {
+      accessorKey: "preciocompra",
+      header: "P. de compra",
+      enableSorting:false,
+      cell: (info) => <td data-title="P. de compra" className="ContentCell">
+        <span >{info.getValue()}</span>
+      </td> 
+    },
+    {
+      accessorKey: "categoria",
+      header: "Categoria",
+      enableSorting:false,
+      cell: (info) => <td data-title="Categoría" className="ContentCell">
+        <ColorcontentTable 
+          $color={info.row.original.color} 
+          className="contentCategoria"
+        >
+          {info.getValue()}
+        </ColorcontentTable>
+      </td> 
+    },
+    {
+      accessorKey: "marca",
+      header: "Marca",
+      enableSorting: false,
+      cell: (info) => <td data-title="Marca" className="ContentCell">
         <span >{info.getValue()}</span>
       </td> 
     },
