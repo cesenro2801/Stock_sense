@@ -3,13 +3,15 @@ import {
   MarcaTemplate,
   ProductosTemplate,
   SpinnerLoader,
+  useCategoriasStore,
   useEmpresaStore,
   useMarcaStore,
   useProductosStore,
 } from "../index";
 
 export function Productos() {
-  const {mostrarMarca} = useMarcaStore()
+  const {mostrarMarca} = useMarcaStore();
+  const {mostrarcategorias} = useCategoriasStore();
   const { mostrarproductos, dataproductos, buscarproductos, buscador } = useProductosStore();
   const { dataempresa } = useEmpresaStore();
   const { isLoading, error } = useQuery({
@@ -29,6 +31,11 @@ export function Productos() {
   const { data:datamarcas } = useQuery({
     queryKey: ["mostrar marca", { id_empresa: dataempresa?.id }],
     queryFn: () => mostrarMarca({ id_empresa: dataempresa?.id }),
+    enabled: dataempresa?.id != null,
+  });
+  const { data:datacategorias } = useQuery({
+    queryKey: ["mostrar categorias", { id_empresa: dataempresa?.id }],
+    queryFn: () => mostrarcategorias({ id_empresa: dataempresa?.id }),
     enabled: dataempresa?.id != null,
   });
   if (isLoading) {
