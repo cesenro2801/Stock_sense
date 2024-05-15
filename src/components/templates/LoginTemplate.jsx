@@ -121,7 +121,7 @@ const Container = styled.div`
     align-items: center;
     justify-content: center;
     img {
-      width: 100%;
+      width: 65%;
     }
   }
   .contentCard {

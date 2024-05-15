@@ -68,7 +68,7 @@ export const DataModulosConfiguracion = [
     title: "Personal",
     subtitle: "ten el control de tu personal",
     icono: "https://i.ibb.co/LJsCBvc/personal1.png",
-    link: "/configurar/usuarios",
+    link: "/configurar/personal",
   },
 
   {
