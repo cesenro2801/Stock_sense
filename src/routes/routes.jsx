@@ -4,10 +4,12 @@ import { useQuery } from "@tanstack/react-query";
 
 export const MyRoutes = () => {
   const {user} = UserAuth();
-  const {mostrarUsuarios, idusuario}= useUsuariosStore();
+  const {mostrarUsuarios, idusuario, mostrarPermisos}= useUsuariosStore();
   const {mostrarEmpresa}=useEmpresaStore();
   const {data:datausuarios, isLoading, error} = useQuery({queryKey:["mostrar usuarios"], queryFn:mostrarUsuarios});
   const {data:dataempresa}=useQuery({queryKey:["mostrar empresa"],queryFn:()=>mostrarEmpresa({idusaurio:idusuario}),enabled:!!datausuarios})
+  const {data:datapermisos}=useQuery({queryKey:["mostrar permisos",{id_usuario:idusuario}],queryFn:()=>mostrarPermisos({id_usuario:idusuario}),enabled:!!datausuarios})
+
   if(isLoading){
     return <SpinnerLoader/>
   }

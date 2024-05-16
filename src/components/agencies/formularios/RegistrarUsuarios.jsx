@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { v } from "../../../styles/variables";
 import {Device} from "../../../styles/breackpoints"
-import { InputText, Btnsave,ConvertirCapitalize, useProductosStore, ContainerSelector, Selector, useMarcaStore, BtnFiltro, RegistrarMarca, ListaGenerica, useCategoriasStore, RegistrarCategorias, TipoDocData, TipouserData } from "../../../index";
+import { InputText, Btnsave,ConvertirCapitalize, useProductosStore, ContainerSelector, Selector, useMarcaStore, BtnFiltro, RegistrarMarca, ListaGenerica, useCategoriasStore, RegistrarCategorias, TipoDocData, TipouserData, useUsuariosStore } from "../../../index";
 import { useForm } from "react-hook-form";
 import { useEmpresaStore } from "../../../store/EmpresaStore";
 import { ListaModulos } from "../ListaModulos";
@@ -13,7 +13,7 @@ export function RegistrarUsuarios({ onClose, dataSelect, accion }) {
     icono: "",
     descripcion: "empleado",
   });
-  const { insertarproductos, editarproductos } = useProductosStore();
+  const { insertarUsuarios, editarUsuarios } = useUsuariosStore();
   const { dataempresa } = useEmpresaStore();
   const { marcaItemSelect, datamarca, selectMarca } = useMarcaStore();
   const { categoriasItemSelect, datacategorias, selectcategorias } = useCategoriasStore();
@@ -40,33 +40,31 @@ export function RegistrarUsuarios({ onClose, dataSelect, accion }) {
     if (accion === "Editar") {
       const p = {
         id: dataSelect.id,
-        descripcion:ConvertirCapitalize(data.descripcion),
-        idmarca: marcaItemSelect.id,
-        stock: parseFloat(data.stock),
-        stock_minimo: parseFloat(data.codigointerno),
-        codigobarras: parseFloat(data.codigobarras),
-        codigointerno: data.codigointerno,
-        precioventa: parseFloat(data.precioventa),
-        preciocompra: parseFloat(data.preciocompra),
-        id_categoria: categoriasItemSelect.id,
-        id_empresa: dataempresa.id,
+        nombres: data.nombres,
+        nro_doc: data.nrodoc,
+        telefono: data.telefono,
+        direccion: data.direccion,
+        tipouser: tipouser.descripcion,
+        tipodoc: tipodoc.descripcion,
       };
-      await editarproductos(p);
+      await editarUsuarios(p);
       onClose();
     } else {
       const p = {
-        _descripcion:ConvertirCapitalize(data.descripcion),
-        _idmarca: marcaItemSelect.id,
-        _stock: parseFloat(data.stock),
-        _stock_minimo: parseFloat(data.codigointerno),
-        _codigobarras: parseFloat(data.codigobarras),
-        _codigointerno: data.codigointerno,
-        _precioventa: parseFloat(data.precioventa),
-        _preciocompra: parseFloat(data.preciocompra),
-        _id_categoria: categoriasItemSelect.id,
-        _id_empresa: dataempresa.id,
+        nombres: data.nombres,
+        correo: data.correo,
+        nrodoc: data.nrodoc,
+        telefono: data.telefono,
+        direccion: data.direccion,
+        tipouser: tipouser.descripcion,
+        tipodoc: tipodoc.descripcion,
+        id_empresa: dataempresa.id,
       };
-      await insertarproductos(p);
+      const parametrosAuth = {
+        correo: data.correo,
+        pass: data.pass
+      };
+      await insertarUsuarios(parametrosAuth, p, checkboxs);
       onClose();
     }
   }
@@ -229,8 +227,6 @@ export function RegistrarUsuarios({ onClose, dataSelect, accion }) {
               checkboxs={checkboxs}
               setCheckboxs={setCheckboxs}
             />
-
-
           </section>
           <div className="btnguardarContent">
               <Btnsave
@@ -239,7 +235,6 @@ export function RegistrarUsuarios({ onClose, dataSelect, accion }) {
                 bgcolor="#ef552b"
               />
             </div>
-
         </form>
       </div>
     </Container>

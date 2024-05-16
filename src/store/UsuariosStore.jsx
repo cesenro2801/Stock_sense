@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { InsertarAsignaciones, InsertarUsuarios, MostrarModulos, MostrarUsuarios, MostrarUsuariosTodos, supabase } from "../index";
+import { InsertarAsignaciones, InsertarPermisos, InsertarUsuarios, MostrarModulos, MostrarPermisos, MostrarUsuarios, MostrarUsuariosTodos, supabase } from "../index";
 
 
 export const useUsuariosStore = create((set, get) => ({
@@ -96,5 +96,11 @@ export const useUsuariosStore = create((set, get) => ({
         const response = await MostrarModulos();
         set({ datamodulos: response });
         return response;
-    }
+    },
+    datapermisos: [],
+    mostrarPermisos: async (p) => {
+        const response = await MostrarPermisos(p);
+        set({ datapermisos: response });
+        return response;
+      },
 }));
