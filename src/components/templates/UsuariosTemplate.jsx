@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { BtnFiltro, Buscador, ContentFiltro, Header, RegistrarMarca, TablaMarca, Title,useMarcaStore,v } from "../../index";
+import { BtnFiltro, Buscador, ContentFiltro, Header, RegistrarMarca, RegistrarUsuarios, TablaMarca, Title,useMarcaStore,v } from "../../index";
 import { useState } from "react";
-export function PersonalTemplate({data}) {
+export function UsuariosTemplate({data}) {
   const [state, setState] = useState(false);
   const [dataSelect, setdataSelect] = useState([]);
   const [accion, setAccion] = useState("");
@@ -15,7 +15,7 @@ export function PersonalTemplate({data}) {
   return (
     <Container>
       {
-        openRegistro &&  <RegistrarMarca dataSelect={dataSelect} accion={accion} onClose={()=>SetopenRegistro(!openRegistro)}/>
+        openRegistro &&  <RegistrarUsuarios dataSelect={dataSelect} accion={accion} onClose={()=>SetopenRegistro(!openRegistro)}/>
       }
      
       <header className="header">

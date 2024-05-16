@@ -2,16 +2,23 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { v } from "../../../styles/variables";
 import {Device} from "../../../styles/breackpoints"
-import { InputText, Btnsave,ConvertirCapitalize, useProductosStore, ContainerSelector, Selector, useMarcaStore, BtnFiltro, RegistrarMarca, ListaGenerica, useCategoriasStore, RegistrarCategorias } from "../../../index";
+import { InputText, Btnsave,ConvertirCapitalize, useProductosStore, ContainerSelector, Selector, useMarcaStore, BtnFiltro, RegistrarMarca, ListaGenerica, useCategoriasStore, RegistrarCategorias, TipoDocData, TipouserData } from "../../../index";
 import { useForm } from "react-hook-form";
 import { useEmpresaStore } from "../../../store/EmpresaStore";
-export function RegistrarProductos({ onClose, dataSelect, accion }) {
+import { ListaModulos } from "../ListaModulos";
+export function RegistrarUsuarios({ onClose, dataSelect, accion }) {
+  const [checkboxs, setCheckboxs]= useState([]);
+  const [tipodoc, setTipodoc] = useState({ icono: "", descripcion: "otros" });
+  const [tipouser, setTipouser] = useState({
+    icono: "",
+    descripcion: "empleado",
+  });
   const { insertarproductos, editarproductos } = useProductosStore();
   const { dataempresa } = useEmpresaStore();
   const { marcaItemSelect, datamarca, selectMarca } = useMarcaStore();
   const { categoriasItemSelect, datacategorias, selectcategorias } = useCategoriasStore();
-  const [stateMarca, setStateMarca] = useState(false);
-  const [stateCategoria, setStateCategoria] = useState(false);
+  const [stateTipodoc, setStateTipodoc] = useState(false);
+  const [stateTipouser, setStateTipouser] = useState(false);
   const [openRegistroMarca, SetopenRegistroMarca] = useState(false);
   const [openRegistroCategoria, SetopenRegistroCategoria] = useState(false);
   const [subaccion, setAccion] = useState("");
@@ -76,7 +83,7 @@ export function RegistrarProductos({ onClose, dataSelect, accion }) {
         <div className="headers">
           <section>
             <h1>
-              {accion == "Editar" ? "Editar producto" : "Registrar nuevo producto"}
+              {accion == "Editar" ? "Editar uduario" : "Registrar nuevo usuario"}
             </h1>
           </section>
 
@@ -91,151 +98,139 @@ export function RegistrarProductos({ onClose, dataSelect, accion }) {
               <InputText icono={<v.icononombre />}>
                 <input
                   className="form__field"
-                  defaultValue={dataSelect.descripcion}
+                  defaultValue={dataSelect.correo}
                   type="text"
                   placeholder=""
-                  {...register("descripcion", {
+                  {...register("correo", {
                     required: true,
                   })}
                 />
-                <label className="form__label">Descripción</label>
-                {errors.nombre?.type === "required" && <p>Campo requerido</p>}
+                <label className="form__label">Correo</label>
+                {errors.correo?.type === "required" && <p>Campo requerido</p>}
               </InputText>
             </article>
-            <ContainerSelector>
-              <label>Marca: </label>
-              <Selector funcion={()=>setStateMarca(!stateMarca)} state={stateMarca}
-                color="#fc6027" 
-                texto1="🍿" 
-                texto2={marcaItemSelect?.descripcion}
-                />
-                {stateMarca && (
-                  <ListaGenerica 
-                    setState={()=>setStateMarca(!stateMarca)} 
-                    bottom="-260px" 
-                    scroll="scroll" 
-                    data={datamarca} 
-                    funcion={selectMarca}/>)}
-                <BtnFiltro 
-                  bgcolor="#f6f3f3"
-                  textcolor="#353535"
-                  funcion={nuevoRegistroMarca}
-                  icono={<v.agregar/>}/>
-            </ContainerSelector>
             <article>
-              <InputText icono={<v.iconostock/>}>
+              <InputText icono={<v.icononombre />}>
                 <input
                   className="form__field"
-                  type="number"
-                  step="0.01"
+                  defaultValue={dataSelect.pass}
+                  type="password"
                   placeholder=""
-                  defaultValue={dataSelect.stock}
-                  {...register("stock", {
+                  {...register("pass", {
                     required: true,
                   })}
                 />
-                <label className="form__label">Stock</label>
-                {errors.stock?.type === "required" && <p>Campo requerido</p>}
+                <label className="form__label">Pass</label>
+                {errors.pass?.type === "required" && <p>Campo requerido</p>}
               </InputText>
             </article>
             <article>
-              <InputText icono={<v.iconostockminimo />}>
-                <input 
-                  step="0.01" 
-                  className="form__field" 
-                  defaultValue={dataSelect.stock_minimo} 
-                  type="number" 
-                  placeholder="" {...register("stockminimo", {required: true,})}/>
-                <label className="form__label">Stock minimo</label>
-                {errors.stockminimo?.type === "required" && (<p>Campo requerido</p>)}
+              <InputText icono={<v.icononombre />}>
+                <input
+                  className="form__field"
+                  defaultValue={dataSelect.nombres}
+                  type="text"
+                  placeholder=""
+                  {...register("nombres", {
+                    required: true,
+                  })}
+                />
+                <label className="form__label">Nombres</label>
+                {errors.nombres?.type === "required" && <p>Campo requerido</p>}
               </InputText>
             </article>
-
             <ContainerSelector>
-              <label>Categoría: </label>
-              <Selector funcion={()=>setStateCategoria(!stateCategoria)} state={stateCategoria}
-                color="#fc6027" 
-                texto1="🍿" 
-                texto2={categoriasItemSelect?.descripcion}
+              <label htmlFor="">Tipo doc:</label>
+              <Selector
+                color="#fc6027"
+                texto1="🎴"
+                texto2={tipodoc.descripcion}
+                funcion={() => setStateTipodoc(!stateTipodoc)}
+              />
+              {stateTipodoc && (
+                <ListaGenerica
+                  data={TipoDocData}
+                  bottom="-260px"
+                  scroll="scroll"
+                  setState={() => setStateTipodoc(!stateTipodoc)}
+                  funcion={(p) => setTipodoc(p)}
                 />
-                <BtnFiltro 
-                  bgcolor="#f6f3f3"
-                  textcolor="#353535"
-                  funcion={nuevoRegistroCategoria}
-                  icono={<v.agregar/>}/>
-                {stateCategoria && (
-                  <ListaGenerica 
-                    setState={()=>setStateCategoria(!stateCategoria)} 
-                    bottom="-160px" 
-                    scroll="scroll" 
-                    data={datacategorias} 
-                    funcion={selectcategorias}/>)}
-                
-            </ContainerSelector>
-
-            
+              )}
+            </ContainerSelector> 
+            <article>
+              <InputText icono={<v.icononombre />}>
+                <input
+                  className="form__field"
+                  defaultValue={dataSelect.nro_doc}
+                  type="number"
+                  placeholder=""
+                  {...register("nrodoc", {
+                    required: true,
+                  })}
+                />
+                <label className="form__label">Nro. doc</label>
+                {errors.nrodoc?.type === "required" && <p>Campo requerido</p>}
+              </InputText>
+            </article>
+            <article>
+              <InputText icono={<v.icononombre />}>
+                <input
+                  className="form__field"
+                  defaultValue={dataSelect.telefono}
+                  type="numbetextr"
+                  placeholder=""
+                  {...register("telefono", {
+                    required: true,
+                  })}
+                />
+                <label className="form__label">Telefono</label>
+                {errors.telefono?.type === "required" && <p>Campo requerido</p>}
+              </InputText>
+            </article>
+            <article>
+              <InputText icono={<v.icononombre />}>
+                <input
+                  className="form__field"
+                  defaultValue={dataSelect.direccion}
+                  type="text"
+                  placeholder=""
+                  {...register("direccion", {
+                    required: true,
+                  })}
+                />
+                <label className="form__label">Direccion</label>
+                {errors.direccion?.type === "required" && <p>Campo requerido</p>}
+              </InputText>
+            </article>
           </section>
+
           <section className="seccion2">
-          <article>
-              <InputText icono={<v.iconocodigobarras />}>
-                <input
-                  className="form__field"
-                  defaultValue={dataSelect.codigobarras}
-                  type="number"
-                  placeholder=""
-                  {...register("codigobarras", {
-                    required: true,
-                  })}
+            <ContainerSelector>
+              <label>Tipo: </label>
+              <Selector
+                color="#fc6027"
+                texto1="👷‍♂️"
+                texto2={tipouser.descripcion}
+                funcion={() => setStateTipouser(!stateTipouser)}
+              />
+              {stateTipouser && (
+                <ListaGenerica
+                  data={TipouserData}
+                  funcion={(p) => setTipouser(p)}
+                  bottom="-150px"
+                  scroll="scroll"
+                  setState={() => setStateTipouser(!stateTipouser)}
                 />
-                <label className="form__label">Código de barras</label>
-                {errors.codigobarras?.type === "required" && <p>Campo requerido</p>}
-              </InputText>
-            </article>
-            <article>
-              <InputText icono={<v.iconocodigointerno />}>
-                <input
-                  className="form__field"
-                  defaultValue={dataSelect.codigointerno}
-                  type="text"
-                  placeholder=""
-                  {...register("codigointerno", {
-                    required: true,
-                  })}
-                />
-                <label className="form__label">Código interno</label>
-                {errors.codigointerno?.type === "required" && <p>Campo requerido</p>}
-              </InputText>
-            </article>
-            <article>
-              <InputText icono={<v.iconoprecioventa/>}>
-                <input
-                  step="0.01"
-                  className="form__field"
-                  defaultValue={dataSelect.precioventa}
-                  type="number"
-                  placeholder=""
-                  {...register("precioventa", {required: true,})}/>
-                  <label className="form__label">Precio de venta</label>
-                  {errors.precioventa?.type === "required" && (
-                    <p>Campo requerido</p>
-                  )}
-              </InputText>
-            </article>
-            <article>
-              <InputText icono={<v.iconopreciocompra/>}>
-                <input
-                  step="0.01"
-                  className="form__field"
-                  defaultValue={dataSelect.preciocompra}
-                  type="number"
-                  placeholder=""
-                  {...register("preciocompra", {required: true,})}/>
-                  <label className="form__label">Precio de compra</label>
-                  {errors.preciocompra?.type === "required" && (
-                    <p>Campo requerido</p>
-                  )}
-              </InputText>
-            </article>
+              )}
+            </ContainerSelector>
+            PERIMSOS:     
+            <ListaModulos
+              accion={accion}
+              checkboxs={checkboxs}
+              setCheckboxs={setCheckboxs}
+            />
+
+
           </section>
           <div className="btnguardarContent">
               <Btnsave
@@ -246,12 +241,6 @@ export function RegistrarProductos({ onClose, dataSelect, accion }) {
             </div>
 
         </form>
-        {
-          openRegistroMarca && (<RegistrarMarca accion={subaccion} onClose={()=>SetopenRegistroMarca(!openRegistroMarca)} dataSelect={dataSelect}/>)
-        }
-        {
-          openRegistroCategoria && (<RegistrarCategorias accion={subaccion} onClose={()=>SetopenRegistroCategoria(!openRegistroCategoria)} dataSelect={dataSelect}/>)
-        }
       </div>
     </Container>
   );

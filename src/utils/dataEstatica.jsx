@@ -105,7 +105,7 @@ export const TipouserData = [
 //tipodoc
 export const TipoDocData = [
   {
-    descripcion: "Dni",
+    descripcion: "Cc",
     icono: "🪖",
   },
   {

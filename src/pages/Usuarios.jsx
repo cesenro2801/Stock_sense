@@ -1,13 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import {
-  MarcaTemplate,
-  PersonalTemplate,
+  UsuariosTemplate,
   SpinnerLoader,
   useEmpresaStore,
   useMarcaStore,
+  useUsuariosStore,
 } from "../index";
 
-export function Personal() {
+export function Usuarios() {
+  const {mostrarModulos}= useUsuariosStore();
   const { mostrarMarca, datamarca, buscarMarca, buscador } = useMarcaStore();
   const { dataempresa } = useEmpresaStore();
   const { isLoading, error } = useQuery({
@@ -24,6 +25,10 @@ export function Personal() {
       buscarMarca({ id_empresa: dataempresa.id, descripcion: buscador }),
     enabled: dataempresa.id != null,
   });
+  const { data:datamodulos } = useQuery({
+    queryKey: ["mostrar modulos"],
+    queryFn:  mostrarModulos,
+  });
   if (isLoading) {
     return <SpinnerLoader />;
   }
@@ -31,5 +36,5 @@ export function Personal() {
     return <span>Error...</span>;
   }
 
-  return <PersonalTemplate data={datamarca}/>;
+  return <UsuariosTemplate data={datamarca}/>;
 }

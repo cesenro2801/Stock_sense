@@ -1,8 +1,9 @@
 import { create } from "zustand";
-import { InsertarAsignaciones, InsertarUsuarios, MostrarUsuarios, MostrarUsuariosTodos, supabase } from "../index";
+import { InsertarAsignaciones, InsertarUsuarios, MostrarModulos, MostrarUsuarios, MostrarUsuariosTodos, supabase } from "../index";
 
 
 export const useUsuariosStore = create((set, get) => ({
+    datamodulos:[],
     insertarUsuarioAdmin: async (p) => {
         const {data, error} = await supabase.auth.signUp({
             email: p.correo,
@@ -57,12 +58,11 @@ export const useUsuariosStore = create((set, get) => ({
             tipouser: p.tipouser,
             tipodoc: p.tipodoc,
             correo: p.correo,
-        });
-
+        })
         await InsertarAsignaciones({
           id_empresa: p.id_empresa,
           id_usuario: dataUserNew.id,
-        }); 
+        })
 
         datacheckpermisos.forEach(async (item) => {
             if (item.check) {
@@ -91,5 +91,10 @@ export const useUsuariosStore = create((set, get) => ({
     buscarUsuarios: async (p) => {
         const response = await BuscarUsuarios(p);
         set({dataUsuarios: response });
+    },
+    mostrarModulos: async () => {
+        const response = await MostrarModulos();
+        set({ datamodulos: response });
+        return response;
     }
 }));
