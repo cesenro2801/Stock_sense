@@ -2,13 +2,13 @@ import styled from "styled-components";
 import { useUsuariosStore } from "../../store/UsuariosStore";
 import { useEffect, useState } from "react";
 export function ListaModulos({ checkboxs, setCheckboxs, accion }) {
-  const { datamodulos,datapermisosEdit,dataPermisos } = useUsuariosStore();
+  const { datamodulos,datapermisosEdit } = useUsuariosStore();
   const [isChecked, setisChecked] = useState(true);
   useEffect(() => {
     if (accion == "Editar") {
         let allDocs = [];
         datamodulos.map((element)=>{
-            const statePermiso=dataPermisos?.some((objeto)=>objeto.modulos.nombre.includes(element.nombre))
+            const statePermiso=datapermisosEdit?.some((objeto)=>objeto.modulos.nombre.includes(element.nombre))
             if(statePermiso){
                 allDocs.push({...element,check: true})
             }
@@ -22,7 +22,7 @@ export function ListaModulos({ checkboxs, setCheckboxs, accion }) {
     } else {
       setCheckboxs(datamodulos);
     }
-  }, [dataPermisos]);
+  }, [datapermisosEdit]);
   const handlecheckbox = (id) => {
     setCheckboxs((prev) => {
       return prev?.map((item) => {

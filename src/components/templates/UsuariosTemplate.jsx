@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { BtnFiltro, Buscador, ContentFiltro, Header, RegistrarMarca, RegistrarUsuarios, TablaMarca, Title,useMarcaStore,v } from "../../index";
+import { BtnFiltro, Buscador, ContentFiltro, Header, RegistrarMarca, RegistrarUsuarios, TablaMarca, TablaUsuarios, Title,useMarcaStore,useUsuariosStore,v } from "../../index";
 import { useState } from "react";
 export function UsuariosTemplate({data}) {
   const [state, setState] = useState(false);
@@ -11,7 +11,7 @@ export function UsuariosTemplate({data}) {
     setAccion("Nuevo")
     setdataSelect([])
   }
-  const {setBuscador} = useMarcaStore()
+  const {setBuscador} = useUsuariosStore()
   return (
     <Container>
       {
@@ -38,7 +38,7 @@ export function UsuariosTemplate({data}) {
         <Buscador setBuscador={setBuscador}/>
       </section>
       <section className="main">
-        <TablaMarca data={data} SetopenRegistro={SetopenRegistro}
+        <TablaUsuarios data={data} SetopenRegistro={SetopenRegistro}
         setdataSelect={setdataSelect} setAccion={setAccion}/>
       </section>
     </Container>

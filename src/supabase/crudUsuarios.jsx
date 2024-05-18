@@ -22,9 +22,9 @@ export const MostrarUsuarios = async () => {
 };
 
 export const MostrarUsuariosTodos = async (p) => {
-    const {error, data} = await supabase.rpc("mostrarpersonal", p)
-    if (data){
-        return data;
+    const { error, data } = await supabase.rpc("mostrar_personal", p);
+        if (data) {
+            return data;
     }
 };
 
@@ -49,11 +49,7 @@ export async function EditarUsuarios(p){
 }
 
 export async function BuscarUsuarios(p) {
-    const { data } = await supabase
-        .from("usuarios")
-        .select()
-        .eq("id_empresa", p.id_empresa)
-        .ilike("descripcion", "%" + p.descripcion + "%")
+    const { data } = await supabase.rpc("buscarpersonal", p)
         return data;
 }
 export const InsertarAsignaciones = async(p)=> {

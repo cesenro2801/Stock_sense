@@ -30,7 +30,7 @@ const Container = styled.div`
   grid-template:
   "header" 100px
   "area1" 100px
-  "main" 250px
+  "main" 300px
   ;
   .header{
     grid-area: header;

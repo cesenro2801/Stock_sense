@@ -2,18 +2,38 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { v } from "../../../styles/variables";
 import {Device} from "../../../styles/breackpoints"
-import { InputText, Btnsave,ConvertirCapitalize, useProductosStore, ContainerSelector, Selector, useMarcaStore, BtnFiltro, RegistrarMarca, ListaGenerica, useCategoriasStore, RegistrarCategorias, TipoDocData, TipouserData, useUsuariosStore } from "../../../index";
+import { InputText, 
+         Btnsave,
+         ConvertirCapitalize, 
+         useProductosStore,
+         ContainerSelector, 
+         Selector, 
+         useMarcaStore, 
+         BtnFiltro, 
+         RegistrarMarca, 
+         ListaGenerica, 
+         useCategoriasStore, 
+         RegistrarCategorias, 
+         TipoDocData, 
+         TipouserData, 
+         useUsuariosStore } from "../../../index";
 import { useForm } from "react-hook-form";
 import { useEmpresaStore } from "../../../store/EmpresaStore";
+import { useQuery } from "@tanstack/react-query";
 import { ListaModulos } from "../ListaModulos";
 export function RegistrarUsuarios({ onClose, dataSelect, accion }) {
+
+  const { isLoading } = useQuery({
+    queryKey: ["mostrar permisos Edit", { id_usuario: dataSelect.id }],
+    queryFn: () => mostrarPermisosEdit({ id_usuario: dataSelect.id }),
+  });
   const [checkboxs, setCheckboxs]= useState([]);
   const [tipodoc, setTipodoc] = useState({ icono: "", descripcion: "otros" });
   const [tipouser, setTipouser] = useState({
     icono: "",
     descripcion: "empleado",
   });
-  const { insertarUsuarios, editarUsuarios } = useUsuariosStore();
+  const { insertarUsuarios, mostrarPermisosEdit,editarUsuarios } = useUsuariosStore();
   const { dataempresa } = useEmpresaStore();
   const { marcaItemSelect, datamarca, selectMarca } = useMarcaStore();
   const { categoriasItemSelect, datacategorias, selectcategorias } = useCategoriasStore();
@@ -47,7 +67,7 @@ export function RegistrarUsuarios({ onClose, dataSelect, accion }) {
         tipouser: tipouser.descripcion,
         tipodoc: tipodoc.descripcion,
       };
-      await editarUsuarios(p);
+      await editarUsuarios(p, checkboxs, dataempresa.id);
       onClose();
     } else {
       const p = {
@@ -71,10 +91,13 @@ export function RegistrarUsuarios({ onClose, dataSelect, accion }) {
 
   useEffect(() => {
     if (accion === "Editar") {
-      selectMarca({id:dataSelect.idmarca,descripcion:dataSelect.marca})
-      selectcategorias({id:dataSelect.id_categoria,descripcion:dataSelect.categoria})
+      setTipodoc({icono:"", descripcion:dataSelect.tipodoc})
+      setTipouser({icono:"",descripcion:dataSelect.tipouser})
     }
   }, []);
+  if (isLoading) {
+    return <span>cargando...</span>;
+  }
   return (
     <Container>
       <div className="sub-contenedor">
@@ -92,41 +115,48 @@ export function RegistrarUsuarios({ onClose, dataSelect, accion }) {
 
         <form className="formulario" onSubmit={handleSubmit(insertar)}>
           <section className="seccion1">
+            {
+              accion!="Editar"?(<article>
+                <InputText icono={<v.icononombre />}>
+                  <input 
+                    className={accion=== "Editar"?"form__field disabled":"form__field"}
+                    defaultValue={dataSelect.correo}
+                    type="text"
+                    placeholder=""
+                    {...register("correo", {
+                      required: true,
+                    })}
+                  />
+                  <label className="form__label">Correo</label>
+                  {errors.correo?.type === "required" && <p>Campo requerido</p>}
+                </InputText>
+              </article>):(<span className="form__field disabled">{dataSelect.correo}</span>)
+            }
+            { 
+              accion!="Editar"?(
+              <article>
+                <InputText icono={<v.icononombre />}>
+                  <input 
+                    className="form__field"
+                    defaultValue={dataSelect.pass}
+                    type="password"
+                    placeholder=""
+                    {...register("pass", {
+                      required: true, minLength:6
+                    })}
+                  />
+                  <label className="form__label">Pass</label>
+                  {errors.pass?.type === "required" && <p>Campo requerido</p>}
+                  {errors.pass?.type === "minLength" && <p>Debe tener al menos 6 caracteres</p>}
+                </InputText>
+              </article>
+              ):(null)
+            }
             <article>
               <InputText icono={<v.icononombre />}>
                 <input
                   className="form__field"
-                  defaultValue={dataSelect.correo}
-                  type="text"
-                  placeholder=""
-                  {...register("correo", {
-                    required: true,
-                  })}
-                />
-                <label className="form__label">Correo</label>
-                {errors.correo?.type === "required" && <p>Campo requerido</p>}
-              </InputText>
-            </article>
-            <article>
-              <InputText icono={<v.icononombre />}>
-                <input
-                  className="form__field"
-                  defaultValue={dataSelect.pass}
-                  type="password"
-                  placeholder=""
-                  {...register("pass", {
-                    required: true,
-                  })}
-                />
-                <label className="form__label">Pass</label>
-                {errors.pass?.type === "required" && <p>Campo requerido</p>}
-              </InputText>
-            </article>
-            <article>
-              <InputText icono={<v.icononombre />}>
-                <input
-                  className="form__field"
-                  defaultValue={dataSelect.nombres}
+                  defaultValue={dataSelect.nombre}
                   type="text"
                   placeholder=""
                   {...register("nombres", {
@@ -252,6 +282,27 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   z-index: 1000;
+
+  .form__field {
+    font-family: inherit;
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid #9b9b9b;
+    outline: 0;
+    font-size: 17px;
+    color: ${(props)=>props.theme.text};
+    padding: 7px 0;
+    background: transparent;
+    transition: border-color 0.2s;
+    &.disabled{
+      color: #696969;
+      background: #2d2d2d;
+      border-radius:8px;
+      margin-top:8px;
+      border-bottom: 1px dashed #656565;
+
+    }
+  }
 
   .sub-contenedor {
     width: 100%;
