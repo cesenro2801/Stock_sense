@@ -271,7 +271,7 @@ const Container = styled.div`
 
   .sub-contenedor {
     width: 100%;
-    max-width: 90%
+    max-width: 90%;
     border-radius: 20px;
     background: ${({ theme }) => theme.bgtotal};
     box-shadow: -10px 15px 30px rgba(10, 9, 9, 0.4);

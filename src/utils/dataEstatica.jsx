@@ -68,7 +68,7 @@ export const DataModulosConfiguracion = [
     title: "Personal",
     subtitle: "ten el control de tu personal",
     icono: "https://i.ibb.co/LJsCBvc/personal1.png",
-    link: "/configurar/usuarios",
+    link: "/configurar/personal",
   },
 
   {
@@ -78,13 +78,13 @@ export const DataModulosConfiguracion = [
     link: "/configurar/empresa",
   },
   {
-    title: "Categoria de productos",
+    title: "Categorias de productos",
     subtitle: "asigna categorias a tus productos",
     icono: "https://i.ibb.co/dG3vLyr/category.png",
     link: "/configurar/categorias",
   },
   {
-    title: "Marca de productos",
+    title: "Marca de Productos",
     subtitle: "gestiona tus marcas",
     icono: "https://i.ibb.co/1zM6742/marca1.png",
     link: "/configurar/marca",
@@ -105,11 +105,11 @@ export const TipouserData = [
 //tipodoc
 export const TipoDocData = [
   {
-    descripcion: "Dni",
+    descripcion: "CC",
     icono: "🪖",
   },
   {
-    descripcion: "Libreta electoral",
+    descripcion: "CE",
     icono: "👑",
   },
   {

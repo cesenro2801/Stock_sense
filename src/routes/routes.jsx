@@ -1,13 +1,15 @@
 import { Routes, Route } from "react-router-dom";
-import { ErrorMolecula, Home, Login, Configuracion, Marca, ProtectedRoute, SpinnerLoader, UserAuth, useEmpresaStore, useUsuariosStore, Categorias, Productos } from "../index";
+import { ErrorMolecula, Home, Login, Configuracion, Marca, ProtectedRoute, SpinnerLoader, UserAuth, useEmpresaStore, useUsuariosStore, Categorias, Productos, Usuarios } from "../index";
 import { useQuery } from "@tanstack/react-query";
 
 export const MyRoutes = () => {
   const {user} = UserAuth();
-  const {mostrarUsuarios, idusuario}= useUsuariosStore();
+  const {mostrarUsuarios, idusuario, mostrarPermisos}= useUsuariosStore();
   const {mostrarEmpresa}=useEmpresaStore();
   const {data:datausuarios, isLoading, error} = useQuery({queryKey:["mostrar usuarios"], queryFn:mostrarUsuarios});
   const {data:dataempresa}=useQuery({queryKey:["mostrar empresa"],queryFn:()=>mostrarEmpresa({idusaurio:idusuario}),enabled:!!datausuarios})
+  const {data:datapermisos}=useQuery({queryKey:["mostrar permisos",{id_usuario:idusuario}],queryFn:()=>mostrarPermisos({id_usuario:idusuario}),enabled:!!datausuarios})
+
   if(isLoading){
     return <SpinnerLoader/>
   }
@@ -25,7 +27,8 @@ export const MyRoutes = () => {
               <Route path="/configurar/marca" element={<Marca />} />
               <Route path="/configurar/categorias" element={<Categorias />} />
               <Route path="/configurar/productos" element={<Productos />} />
+              <Route path="/configurar/personal" element={<Usuarios />} />
           </Route>
         </Routes>
   );
-};
+}

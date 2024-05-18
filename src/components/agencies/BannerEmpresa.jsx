@@ -10,21 +10,16 @@ export function BannerEmpresa(){
         <div className="content-wrapper-context">
             <span className="titulo">
             <img src={stock}></img>
-                {dataempresa.empresa?.nombre}
+                {dataempresa?.nombre}
             </span>
             <div className="content-text">
                 StockSense te mantiene siempre informado
             </div>
             <ContentCards>
-                <CardDatosEmpresa titulo="Moneda" valor={dataempresa.empresa?.simbolomoneda} />
+                <CardDatosEmpresa titulo="Moneda" valor={dataempresa?.simbolomoneda} />
                 <CardDatosEmpresa titulo="Usuarios" valor={contadorusuarios}/>
             </ContentCards>
         </div>
-        
-          
-          
-            
-      
     </Container>);
 }
 const Container =styled.div`

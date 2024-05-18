@@ -30,7 +30,7 @@ const Container = styled.div`
   grid-template:
   "header" 100px
   "area1" 100px
-  "main" 250px
+  "main" 300px
   ;
   .header{
     grid-area: header;
@@ -45,9 +45,7 @@ const Container = styled.div`
   }
   .main{
     grid-area: main;
-    /* background-color: rgba(96, 93, 241, 0.14); */
-    }
-    
+    /* background-color: rgba(96, 93, 241, 0.14); */    
   }
 `;
 
