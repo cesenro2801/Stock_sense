@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import {
   BloqueoPagina,
-  MarcaTemplate,
+  KardexTemplate,
   SpinnerLoader,
   useEmpresaStore,
   useMarcaStore,
@@ -37,5 +37,5 @@ export function Kardex() {
     return <span>Error...</span>;
   }
 
-  return <MarcaTemplate data={datamarca}/>;
+  return <KardexTemplate data={datamarca}/>;
 }
