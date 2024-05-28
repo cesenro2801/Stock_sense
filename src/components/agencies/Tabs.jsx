@@ -1,15 +1,17 @@
+import React, {useState} from "react";
 import styled from "styled-components";
 import { v } from "../../styles/variables";
 import { Device } from "../../styles/breackpoints";
+import { TablaKardex } from "../../index"
 
-export function Tabs(){
+export function Tabs({data}){
     const [activeTab, setactiveTab] = useState(0);
     const handleClick = (index) => {
         setactiveTab(index);
     }
     
     return (
-    <Containter className="container" activeTab={`${activeTab}00%`}>
+    <Container className="container" activeTab={`${activeTab}00%`}>
         <ul className="tabs">
             <li className={ activeTab == 0 ? "active": "" } onClick={()=>handleClick(0)}>
                 {<v.iconopie/>}
@@ -22,12 +24,12 @@ export function Tabs(){
             <span className="glider"></span>
         </ul>
         <div className="tab-content">
-            {activeTab===0 && <span>tab1</span> }
+            {activeTab===0 && <TablaKardex data={data} /> }
             {activeTab===1 && <span>tab2</span> }
             {activeTab===2 && <span>tab3</span> }
         </div>
         
-    </Containter>)
+    </Container>)
 }
 
 const Container = styled.div`
@@ -84,6 +86,7 @@ const Container = styled.div`
                 height: 4px;
                 width: 180px;
                 bottom: 0;
+                top: 100%;
             }
         }
     }

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Btnsave, Buscador, ContentFiltro, Header, RegistrarMarca, TablaMarca, Title,useMarcaStore,v } from "../../index";
+import { Btnsave, Buscador, ContentFiltro, Header, RegistrarMarca, Tabs, Title,useMarcaStore,v } from "../../index";
 import { useState } from "react";
 
 
@@ -39,6 +39,7 @@ export function KardexTemplate({data}) {
         <Buscador setBuscador={setBuscador}/>
       </section>
       <section className="main">
+      <Tabs data={data}/>
         
       </section>
     </Container>
