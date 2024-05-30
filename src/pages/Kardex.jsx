@@ -4,18 +4,18 @@ import {
   KardexTemplate,
   SpinnerLoader,
   useEmpresaStore,
-  useMarcaStore,
+  useKardexStore,
   useUsuariosStore,
 } from "../index";
 
 export function Kardex() {
   const {datapermisos} = useUsuariosStore();
   const statePermiso = datapermisos.some((objeto)=>objeto.modulos.nombre.includes("Marca de Productos"))
-  const { mostrarMarca, datamarca, buscarMarca, buscador } = useMarcaStore();
+  const { mostrarkardex, datakardex, buscarkardex, buscador } = useKardexStore();
   const { dataempresa } = useEmpresaStore();
   const { isLoading, error } = useQuery({
-    queryKey: ["mostrar marca", { id_empresa: dataempresa?.id }],
-    queryFn: () => mostrarMarca({ id_empresa: dataempresa?.id }),
+    queryKey: ["mostrar kardex", { _id_empresa: dataempresa?.id }],
+    queryFn: () => mostrarkardex({ _id_empresa: dataempresa?.id }),
     enabled: dataempresa?.id != null,
   });
   const { data: buscardata } = useQuery({
@@ -24,7 +24,7 @@ export function Kardex() {
       { id_empresa: dataempresa.id, descripcion: buscador },
     ],
     queryFn: () =>
-      buscarMarca({ id_empresa: dataempresa.id, descripcion: buscador }),
+      buscarkardex({ id_empresa: dataempresa.id, descripcion: buscador }),
     enabled: dataempresa.id != null,
   });
   if(statePermiso==false){
@@ -37,5 +37,5 @@ export function Kardex() {
     return <span>Error...</span>;
   }
 
-  return <KardexTemplate data={datamarca}/>;
+  return <KardexTemplate data={datakardex}/>;
 }

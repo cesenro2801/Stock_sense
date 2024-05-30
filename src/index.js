@@ -13,6 +13,7 @@ export * from './components/agencies/ToggleTema';
 export * from './components/agencies/formularios/InputText';
 export * from './components/agencies/formularios/RegistrarAdmin';
 export * from './components/agencies/formularios/RegistrarCategorias';
+export * from './components/agencies/formularios/RegistrarKardex';
 export * from './components/agencies/formularios/RegistrarMarca';
 export * from './components/agencies/formularios/RegistrarProductos';
 export * from './components/agencies/formularios/RegistrarUsuarios';

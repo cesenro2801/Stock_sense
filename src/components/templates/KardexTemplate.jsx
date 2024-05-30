@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Btnsave, Buscador, ContentFiltro, Header, RegistrarMarca, Tabs, Title,useMarcaStore,v } from "../../index";
+import { Btnsave, Buscador, ContentFiltro, Header, RegistrarKardex, Tabs, Title,useMarcaStore,v } from "../../index";
 import { useState } from "react";
 
 
@@ -17,7 +17,7 @@ export function KardexTemplate({data}) {
   return (
     <Container>
       {
-        openRegistro &&  <RegistrarMarca dataSelect={dataSelect} accion={accion} onClose={()=>SetopenRegistro(!openRegistro)}/>
+        openRegistro &&  <RegistrarKardex dataSelect={dataSelect} accion={accion} onClose={()=>SetopenRegistro(!openRegistro)}/>
       }
      
       <header className="header">
