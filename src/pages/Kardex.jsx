@@ -5,10 +5,12 @@ import {
   SpinnerLoader,
   useEmpresaStore,
   useKardexStore,
+  useProductosStore,
   useUsuariosStore,
 } from "../index";
 
 export function Kardex() {
+  const { buscarproductos } = useProductosStore()
   const {datapermisos} = useUsuariosStore();
   const statePermiso = datapermisos.some((objeto)=>objeto.modulos.nombre.includes("Marca de Productos"))
   const { mostrarkardex, datakardex, buscarkardex, buscador } = useKardexStore();
@@ -18,15 +20,18 @@ export function Kardex() {
     queryFn: () => mostrarkardex({ _id_empresa: dataempresa?.id }),
     enabled: dataempresa?.id != null,
   });
+
   const { data: buscardata } = useQuery({
     queryKey: [
-      "buscar marca",
+      "buscar productos",
       { id_empresa: dataempresa.id, descripcion: buscador },
     ],
     queryFn: () =>
-      buscarkardex({ id_empresa: dataempresa.id, descripcion: buscador }),
+      buscarproductos({ _id_empresa: dataempresa.id, buscador: buscador }),
     enabled: dataempresa.id != null,
   });
+
+
   if(statePermiso==false){
     return <BloqueoPagina />
   }

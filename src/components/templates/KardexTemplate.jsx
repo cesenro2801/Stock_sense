@@ -8,16 +8,21 @@ export function KardexTemplate({data}) {
   const [dataSelect, setdataSelect] = useState([]);
   const [accion, setAccion] = useState("");
   const [openRegistro, SetopenRegistro] = useState(false);
-  const nuevoRegistro=()=>{
-    SetopenRegistro(!openRegistro);
-    setAccion("Nuevo")
-    setdataSelect([])
+
+  const nuevaentrada=()=>{
+    SetopenRegistro(true);
+    setTipo("entrada")
+  }
+
+  const nuevasalida=()=>{
+    SetopenRegistro(true);
+    setTipo("salida")
   }
   const {setBuscador} = useMarcaStore()
   return (
     <Container>
       {
-        openRegistro &&  <RegistrarKardex dataSelect={dataSelect} accion={accion} onClose={()=>SetopenRegistro(!openRegistro)}/>
+        openRegistro &&  <RegistrarKardex tipo={tipo} dataSelect={dataSelect} accion={accion} onClose={()=>SetopenRegistro(!openRegistro)}/>
       }
      
       <header className="header">
@@ -30,8 +35,8 @@ export function KardexTemplate({data}) {
           <Title>
             Kardex
           </Title>
-          <Btnsave bgcolor="#6CB35C" titulo="+ Entradas" />
-          <Btnsave bgcolor="#D87648" titulo="- Salidas" />
+          <Btnsave bgcolor="#6CB35C" titulo="+ Entradas" funcion={nuevaentrada}/>
+          <Btnsave bgcolor="#D87648" titulo="- Salidas" funcion={nuevasalida} />
         </ContentFiltro>
        
       </section>
