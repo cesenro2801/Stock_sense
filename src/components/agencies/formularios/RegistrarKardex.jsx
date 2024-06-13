@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { v } from "../../../styles/variables";
-import { InputText, Btnsave, useMarcaStore,ConvertirCapitalize, useProductosStore, Buscador, ListaGenerica } from "../../../index";
+import { InputText, Btnsave, useMarcaStore,ConvertirCapitalize, useProductosStore, Buscador, ListaGenerica, CardProductoSelect } from "../../../index";
 import { useForm } from "react-hook-form";
 import { useEmpresaStore } from "../../../store/EmpresaStore";
 
 
 export function RegistrarKardex({ onClose, dataSelect, accion, tipo }) {
-  const { dataproductos, setBuscador } = useProductosStore()
+  const { dataproductos, setBuscador, selectproductos, productosItemSelect } = useProductosStore()
   const [stateListaProd, SetstateListaProd] = useState(false);
   const { insertarMarca, editarMarca } = useMarcaStore();
   const { dataempresa } = useEmpresaStore();
@@ -55,16 +55,18 @@ export function RegistrarKardex({ onClose, dataSelect, accion, tipo }) {
         </div>
 
         <div className="contentBuscador">
-          <div>
+          <div onClick={()=>SetstateListaProd(!stateListaProd)}>
             <Buscador setBuscador={setBuscador}/>
           </div>
-        </div>
-        {
+          {
           stateListaProd && (
-            <ListaGenerica data={dataproductos} setState={()=>SetstateListaProd(!stateListaProd)} />
+            <ListaGenerica scroll="scroll" bottom="-250px" data={dataproductos} setState={()=>SetstateListaProd(!stateListaProd)} function={selectproductos} />
           
           )
         }
+        </div>
+        <CardProductoSelect text1={productosItemSelect.descripcion} text2={productosItemSelect.stock}/>
+        
 
 
 
@@ -120,6 +122,11 @@ const Container = styled.div`
     box-shadow: -10px 15px 30px rgba(10, 9, 9, 0.4);
     padding: 13px 36px 20px 36px;
     z-index: 100;
+
+    .contentBuscador {
+      position: relative;
+
+    }
 
     .headers {
       display: flex;

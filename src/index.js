@@ -39,6 +39,7 @@ export * from './components/molecules/BtnCircular';
 export * from './components/molecules/BtnFiltro';
 export * from './components/molecules/Btnsave';
 export * from './components/molecules/CardDatosEmpresa';
+export * from './components/molecules/CardProductoSelect';
 export * from './components/molecules/ErrorMolecula';
 export * from './components/molecules/Mensaje';
 export * from './components/molecules/SpinnerLoader';
