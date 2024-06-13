@@ -1,13 +1,15 @@
 import styled from "styled-components";
-import { Btnsave, Buscador, ContentFiltro, Header, RegistrarKardex, Tabs, Title,useMarcaStore,v } from "../../index";
+import { Btnsave, Buscador, ContentFiltro, Header, RegistrarKardex, Tabs, Title,useKardexStore,useMarcaStore,v } from "../../index";
 import { useState } from "react";
 
 
 export function KardexTemplate({data}) {
+  const {setBuscador} = useKardexStore();
   const [state, setState] = useState(false);
   const [dataSelect, setdataSelect] = useState([]);
   const [accion, setAccion] = useState("");
   const [openRegistro, SetopenRegistro] = useState(false);
+  const [tipo, setTipo] = useState("");
 
   const nuevaentrada=()=>{
     SetopenRegistro(true);
@@ -18,7 +20,7 @@ export function KardexTemplate({data}) {
     SetopenRegistro(true);
     setTipo("salida")
   }
-  const {setBuscador} = useMarcaStore()
+  
   return (
     <Container>
       {
@@ -45,7 +47,6 @@ export function KardexTemplate({data}) {
       </section>
       <section className="main">
       <Tabs data={data}/>
-        
       </section>
     </Container>
   );

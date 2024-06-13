@@ -14,7 +14,8 @@ export async function InsertarCategorias(p) {
 }
 
 export async function MostrarCategorias(p){
-    const {data} = await supabase
+    const { data } = await supabase 
+        .from("categorias")
         .from("categorias")
         .select()
         .eq("id_empresa", p.id_empresa)

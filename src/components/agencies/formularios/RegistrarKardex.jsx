@@ -1,13 +1,13 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { v } from "../../../styles/variables";
-import { InputText, Btnsave,useMarcaStore,ConvertirCapitalize, useProductosStore } from "../../../index";
+import { InputText, Btnsave, useMarcaStore,ConvertirCapitalize, useProductosStore, Buscador, ListaGenerica } from "../../../index";
 import { useForm } from "react-hook-form";
 import { useEmpresaStore } from "../../../store/EmpresaStore";
 
 
 export function RegistrarKardex({ onClose, dataSelect, accion, tipo }) {
-  const { dataproductos } = useProductosStore()
+  const { dataproductos, setBuscador } = useProductosStore()
   const [stateListaProd, SetstateListaProd] = useState(false);
   const { insertarMarca, editarMarca } = useMarcaStore();
   const { dataempresa } = useEmpresaStore();
@@ -56,12 +56,13 @@ export function RegistrarKardex({ onClose, dataSelect, accion, tipo }) {
 
         <div className="contentBuscador">
           <div>
-            <Buscador/>
+            <Buscador setBuscador={setBuscador}/>
           </div>
         </div>
         {
           stateListaProd && (
-            <ListaGenerica data={dataproductos} />
+            <ListaGenerica data={dataproductos} setState={()=>SetstateListaProd(!stateListaProd)} />
+          
           )
         }
 
