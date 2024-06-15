@@ -28,7 +28,7 @@ export function Kardex() {
       { id_empresa: dataempresa.id, descripcion: buscadorproductos },
     ],
     queryFn: () =>
-      buscarproductos({ _id_empresa: dataempresa.id, buscador: buscador }),
+      buscarproductos({ _id_empresa: dataempresa.id, buscador: buscadorproductos }),
     enabled: dataempresa.id != null,
   });
 
