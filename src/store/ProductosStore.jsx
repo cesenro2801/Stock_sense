@@ -15,7 +15,7 @@ export const useProductosStore = create((set, get) => ({
         return response;
     },
     selectproductos:(p)=>{
-        set({productosItemSelect:p})
+        set({productosItemSelect:p});
     },
     insertarproductos:async (p) => {
         await InsertarProductos(p);

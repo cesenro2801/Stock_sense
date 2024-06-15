@@ -60,7 +60,7 @@ export function RegistrarKardex({ onClose, dataSelect, accion, tipo }) {
           </div>
           {
           stateListaProd && (
-            <ListaGenerica scroll="scroll" bottom="-250px" data={dataproductos} setState={()=>SetstateListaProd(!stateListaProd)} function={selectproductos} />
+            <ListaGenerica scroll="scroll" bottom="-250px" data={dataproductos} setState={()=>SetstateListaProd(!stateListaProd)} funcion={selectproductos} />
           
           )
         }
@@ -68,25 +68,40 @@ export function RegistrarKardex({ onClose, dataSelect, accion, tipo }) {
         <CardProductoSelect text1={productosItemSelect.descripcion} text2={productosItemSelect.stock}/>
         
 
-
-
         <form className="formulario" onSubmit={handleSubmit(insertar)}>
           <section>
             <article>
-              <InputText icono={<v.iconomarca />}>
+              <InputText icono={<v.iconocalculadora />}>
+                <input
+                  className="form__field"
+                  defaultValue={dataSelect.descripcion}
+                  type="number"
+                  placeholder=""
+                  {...register("cantidad", {
+                    required: true,
+                  })}
+                />
+                <label className="form__label">Cantidad</label>
+                {errors.cantidad?.type === "required" && <p>Campo requerido</p>}
+              </InputText>
+            </article>
+            
+            <article>
+              <InputText icono={<v.iconotodos />}>
                 <input
                   className="form__field"
                   defaultValue={dataSelect.descripcion}
                   type="text"
                   placeholder=""
-                  {...register("nombre", {
+                  {...register("detalle", {
                     required: true,
                   })}
                 />
-                <label className="form__label">marca</label>
-                {errors.nombre?.type === "required" && <p>Campo requerido</p>}
+                <label className="form__label">Detalle</label>
+                {errors.detalle?.type === "required" && <p>Campo requerido</p>}
               </InputText>
             </article>
+
 
             <div className="btnguardarContent">
               <Btnsave
