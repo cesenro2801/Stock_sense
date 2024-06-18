@@ -1,16 +1,16 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { v } from "../../../styles/variables";
-import { InputText, Btnsave, useMarcaStore,ConvertirCapitalize, useProductosStore, Buscador, ListaGenerica, CardProductoSelect, useKardexStore, useUsuariosStore } from "../../../index";
+import { InputText, Btnsave, useProductosStore, Buscador, ListaGenerica, CardProductoSelect, useKardexStore, useUsuariosStore } from "../../../index";
 import { useForm } from "react-hook-form";
 import { useEmpresaStore } from "../../../store/EmpresaStore";
 
 
 export function RegistrarKardex({ onClose, dataSelect, accion, tipo }) {
   const { dataproductos, setBuscador, selectproductos, productosItemSelect } = useProductosStore();
-  const {idusuario}= useUsuariosStore();
+  const { idusuario }= useUsuariosStore();
   const [stateListaProd, SetstateListaProd] = useState(false);
-  const { insertarkardex} = useKardexStore();
+  const { insertarkardex } = useKardexStore();
   const { dataempresa } = useEmpresaStore();
   const {
     register,
@@ -22,11 +22,11 @@ export function RegistrarKardex({ onClose, dataSelect, accion, tipo }) {
       const p = {
         fecha: new Date(),
         tipo: tipo,
-        id_usuario:idusuario,
-        id_producto:productosItemSelect.id,
+        id_usuario: idusuario,
+        id_producto: productosItemSelect.id,
         cantidad: parseFloat(data.cantidad),
-        detalle:data.detalle,
-        id_empresa:dataempresa.id
+        detalle: data.detalle,
+        id_empresa: dataempresa.id
       };
       await insertarkardex(p);
       onClose();
@@ -58,13 +58,11 @@ export function RegistrarKardex({ onClose, dataSelect, accion, tipo }) {
           {
           stateListaProd && (
             <ListaGenerica scroll="scroll" bottom="-250px" data={dataproductos} setState={()=>SetstateListaProd(!stateListaProd)} funcion={selectproductos} />
-          
           )
         }
         </div>
         <CardProductoSelect text1={productosItemSelect.descripcion} text2={productosItemSelect.stock}/>
         
-
         <form className="formulario" onSubmit={handleSubmit(insertar)}>
           <section>
             <article>
@@ -98,8 +96,6 @@ export function RegistrarKardex({ onClose, dataSelect, accion, tipo }) {
                 {errors.detalle?.type === "required" && <p>Campo requerido</p>}
               </InputText>
             </article>
-
-
             <div className="btnguardarContent">
               <Btnsave
                 icono={<v.iconoguardar />}

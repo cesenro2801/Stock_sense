@@ -37,8 +37,8 @@ export function KardexTemplate({data}) {
           <Title>
             Kardex
           </Title>
-          <Btnsave bgcolor="#6CB35C" titulo="+ Entradas" funcion={nuevaentrada}/>
-          <Btnsave bgcolor="#D87648" titulo="- Salidas" funcion={nuevasalida} />
+          <Btnsave bgcolor="#6CB" titulo="+ Entradas" funcion={nuevaentrada}/>
+          <Btnsave bgcolor="#D87" titulo="- Salidas" funcion={nuevasalida} />
         </ContentFiltro>
        
       </section>
