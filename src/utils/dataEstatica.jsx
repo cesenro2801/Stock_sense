@@ -34,7 +34,7 @@ export const LinksArray = [
   {
     label: "Reportes",
     icon: <v.iconoreportes />,
-    to: "/reportes",
+    to: "/reporte",
   },
 ];
 export const SecondarylinksArray = [
