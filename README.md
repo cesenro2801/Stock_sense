@@ -32,5 +32,6 @@ yarn add @supabase/supabase-js
 yarn add react-spinners
 yarn add react-lottie
 yarn add react-color
+yarn add @react-pdf/renderer
 ```
 
