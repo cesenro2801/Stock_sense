@@ -29,7 +29,7 @@ export function ReporteKardex({data}) {
           <Page size="A4" style={styles.page}  orientation="landscape">
             <View style={styles.section}>
               <View>
-                <Text>Movimientos de kardex</Text>
+                <Text>Movimientos de Kardex</Text>
                 <Text>Fecha y Hora de Impresión: {formattedDate}</Text>
                 <View>
                     {renderTableRow({ fecha:"Fecha", descripcion:"Producto" }, true)}
