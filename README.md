@@ -33,5 +33,6 @@ yarn add react-spinners
 yarn add react-lottie
 yarn add react-color
 yarn add @react-pdf/renderer
+yarn add serve
 ```
 
