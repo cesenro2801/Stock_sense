@@ -18,11 +18,11 @@ export const MyRoutes = () => {
   }
   return (
         <Routes>
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Login />} />
           <Route 
-          element={<ProtectedRoute user = {user} redirectTo="/login"/>}
+          element={<ProtectedRoute user = {user} redirectTo="/"/>}
           >
-              <Route path="/" element={<Home />} />
+              <Route path="/inicio" element={<Home />} />
               <Route path="/configurar" element={<Configuracion />} />
               <Route path="/configurar/marca" element={<Marca />} />
               <Route path="/configurar/categorias" element={<Categorias />} />
