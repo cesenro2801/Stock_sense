@@ -32,22 +32,26 @@ export function KardexTemplate({data}) {
           stateConfig={{ state: state, setState: () => setState(!state) }}
         />
       </header>
+
+      <section className="area0">
+          <Title> Kardex </Title>
+      </section>
+
       <section className="area1">
         <ContentFiltro>
-          <Title>
-            Kardex
-          </Title>
           <Btnsave bgcolor="#6CB" titulo="+ Entradas" funcion={nuevaentrada}/>
           <Btnsave bgcolor="#D87" titulo="- Salidas" funcion={nuevasalida} />
         </ContentFiltro>
-       
       </section>
+
       <section className="area2">
         <Buscador setBuscador={setBuscador}/>
       </section>
+
       <section className="main">
       <Tabs data={data}/>
       </section>
+      
     </Container>
   );
 }
@@ -60,8 +64,9 @@ const Container = styled.div`
   padding: 15px;
   grid-template:
     "header" 100px
+    "area0" 10px
     "area1" 100px
-    "area2" 100px
+    "area2" 80px
     "main" auto;
   .header {
     grid-area: header;
@@ -70,22 +75,25 @@ const Container = styled.div`
     align-items: center;
     
   }
+  .area0 {
+    grid-area: area0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   .area1 {
     grid-area: area1;
-    /* background-color: rgba(229, 67, 26, 0.14); */
     display: flex;
     align-items: center;
     justify-content: center;
   }
   .area2 {
     grid-area: area2;
-    /* background-color: rgba(77, 237, 106, 0.14); */
     display: flex;
     align-items: center;
     justify-content: center;
   }
   .main {
     grid-area: main;
-    /* background-color: rgba(179, 46, 241, 0.14); */
   }
 `;
