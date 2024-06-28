@@ -55,9 +55,8 @@ const Container = styled.div`
   }
   #cards {
     display: flex;
-    flex-wrap: wrap;
     gap: 8px;
-    max-width: 916px;
+    max-width: 1400px;
     width: calc(100% - 20px);
   }
 

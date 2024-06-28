@@ -251,7 +251,7 @@ export function RegistrarUsuarios({ onClose, dataSelect, accion }) {
                 />
               )}
             </ContainerSelector>
-            PERIMSOS:     
+            PERMISOS:     
             <ListaModulos
               accion={accion}
               checkboxs={checkboxs}

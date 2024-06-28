@@ -15,7 +15,7 @@ export function UsuariosTemplate({data}) {
   return (
     <Container>
       {
-        openRegistro &&  <RegistrarUsuarios dataSelect={dataSelect} accion={accion} onClose={()=>SetopenRegistro(!openRegistro)}/>
+        openRegistro &&  <RegistrarUsuarios dataSelect={dataSelect} accion={accion} />
       }
      
       <header className="header">
