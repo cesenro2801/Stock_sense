@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Btnsave, Buscador, ContentFiltro, Header, RegistrarKardex, Tabs, Title,useKardexStore,useMarcaStore,v } from "../../index";
+import { Btnsave, Buscador, ContentFiltro, Header, RegistrarKardex, Tabs, Title,useKardexStore} from "../../index";
 import { useState } from "react";
 
 

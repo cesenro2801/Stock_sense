@@ -35,21 +35,9 @@ export function RegistrarUsuarios({ onClose, dataSelect, accion }) {
   });
   const { insertarUsuarios, mostrarPermisosEdit,editarUsuarios } = useUsuariosStore();
   const { dataempresa } = useEmpresaStore();
-  const { marcaItemSelect, datamarca, selectMarca } = useMarcaStore();
-  const { categoriasItemSelect, datacategorias, selectcategorias } = useCategoriasStore();
   const [stateTipodoc, setStateTipodoc] = useState(false);
   const [stateTipouser, setStateTipouser] = useState(false);
-  const [openRegistroMarca, SetopenRegistroMarca] = useState(false);
-  const [openRegistroCategoria, SetopenRegistroCategoria] = useState(false);
-  const [subaccion, setAccion] = useState("");
-  const nuevoRegistroMarca =()=> {
-    SetopenRegistroMarca(!openRegistroMarca)
-    setAccion("Nuevo")
-  };
-  const nuevoRegistroCategoria=()=> {
-    SetopenRegistroCategoria(!openRegistroCategoria);
-    setAccion("Nuevo");
-  }
+  
   const {
     register,
     formState: { errors },
@@ -363,30 +351,3 @@ const Container = styled.div`
   }
 `;
 
-const ContentTitle = styled.div`
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  gap: 20px;
-  svg {
-    font-size: 25px;
-  }
-  input {
-    border: none;
-    outline: none;
-    background: transparent;
-    padding: 2px;
-    width: 40px;
-    font-size: 28px;
-  }
-`;
-const ContainerEmojiPicker = styled.div`
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-`;

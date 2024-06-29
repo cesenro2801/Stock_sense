@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import {Icono} from "../../index"
-export function Btnsave({ funcion, titulo, bgcolor, icono,url }) {
+export function Btnsave({ funcion, titulo, bgcolor, icono,url, onClick }) {
   return (
-    <Container type="submit" $bgcolor={bgcolor}>
+    <Container type="submit" $bgcolor={bgcolor} onClick={funcion || onClick}>
      <Icono>{icono}</Icono>
       <span className="btn" onClick={funcion}>
         <a href={url} target="_blank">
