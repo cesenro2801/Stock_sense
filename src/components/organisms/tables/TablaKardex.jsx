@@ -22,14 +22,12 @@ export function TablaKardex({
   const { eliminarkardex } = useKardexStore();
 
   const editar = (data) => {
-    if (data.descripcion === "Generica") {
       Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Esta registro no se permite modificar ya que es valor por defecto.",
+        icon: "info",
+        title: "Volver más tarde",
+        text: "¡Uy! Parece que esta función está tomando un descanso. No te preocupes, estamos trabajando para solucionarlo lo antes posible.",
       });
       return;
-    }
     SetopenRegistro(true);
     setdataSelect(data);
     setAccion("Editar");

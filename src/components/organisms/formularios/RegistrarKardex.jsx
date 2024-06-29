@@ -18,19 +18,25 @@ export function RegistrarKardex({ onClose, dataSelect, accion, tipo }) {
     handleSubmit,
   } = useForm();
 
-  async function insertar(data) {
-      const p = {
+  const handleSaveClick = async (data) => {
+    try {
+      const payload = {
+        cantidad: parseFloat(data.cantidad),
+        detalle: data.detalle,
         fecha: new Date(),
         tipo: tipo,
         id_usuario: idusuario,
         id_producto: productosItemSelect.id,
-        cantidad: parseFloat(data.cantidad),
-        detalle: data.detalle,
-        id_empresa: dataempresa.id
+        id_empresa: dataempresa.id,
       };
-      await insertarkardex(p);
-      onClose();
-  }
+  
+      await insertarkardex(payload);
+      onClose(); // Close the modal
+    } catch (error) {
+      console.error("Error al agregar el producto", error);
+    }
+  };
+
 
   useEffect(() => {
     if (accion === "Editar") {
@@ -41,59 +47,57 @@ export function RegistrarKardex({ onClose, dataSelect, accion, tipo }) {
       <div className="sub-contenedor">
         <div className="headers">
           <section>
-            <h1>
-              Nuevo {tipo == "entrada" ? "entrada" : "salida"}
-            </h1>
+            <h1>Nuevo {tipo === "entrada" ? "entrada" : "salida"}</h1>
           </section>
-
           <section>
             <span onClick={onClose}>x</span>
           </section>
         </div>
-
+  
         <div className="contentBuscador">
-          <div onClick={()=>SetstateListaProd(!stateListaProd)}>
-            <Buscador setBuscador={setBuscador}/>
+          <div onClick={() => SetstateListaProd(!stateListaProd)}>
+            <Buscador setBuscador={setBuscador} />
           </div>
-          {
-          stateListaProd && (
-            <ListaGenerica scroll="scroll" bottom="-250px" data={dataproductos} setState={()=>SetstateListaProd(!stateListaProd)} funcion={selectproductos} />
-          )
-        }
+          {stateListaProd && (
+            <ListaGenerica
+              scroll="scroll"
+              bottom="-250px"
+              data={dataproductos}
+              setState={() => SetstateListaProd(!stateListaProd)}
+              funcion={selectproductos}
+            />
+          )}
         </div>
-        <CardProductoSelect text1={productosItemSelect.descripcion} text2={productosItemSelect.stock}/>
-        
-        <form className="formulario" onSubmit={handleSubmit(insertar)}>
+        <CardProductoSelect
+          text1={productosItemSelect.descripcion}
+          text2={productosItemSelect.stock}
+        />
+  
+        <form className="formulario" onSubmit={handleSubmit(handleSaveClick)}>
           <section>
             <article>
               <InputText icono={<v.iconocalculadora />}>
                 <input
                   className="form__field"
-                  defaultValue={dataSelect.descripcion}
                   type="number"
                   placeholder=""
-                  {...register("cantidad", {
-                    required: true,
-                  })}
+                  {...register("cantidad", { required: true })}
                 />
                 <label className="form__label">Cantidad</label>
-                {errors.cantidad?.type === "required" && <p>Campo requerido</p>}
+                {errors.cantidad && <p>Campo requerido</p>}
               </InputText>
             </article>
-            
+  
             <article>
               <InputText icono={<v.iconotodos />}>
                 <input
                   className="form__field"
-                  defaultValue={dataSelect.descripcion}
                   type="text"
                   placeholder=""
-                  {...register("detalle", {
-                    required: true,
-                  })}
+                  {...register("detalle", { required: true })}
                 />
                 <label className="form__label">Detalle</label>
-                {errors.detalle?.type === "required" && <p>Campo requerido</p>}
+                {errors.detalle && <p>Campo requerido</p>}
               </InputText>
             </article>
             <div className="btnguardarContent">
@@ -101,6 +105,7 @@ export function RegistrarKardex({ onClose, dataSelect, accion, tipo }) {
                 icono={<v.iconoguardar />}
                 titulo="Guardar"
                 bgcolor="#ef552b"
+                onClick={handleSubmit(handleSaveClick)}
               />
             </div>
           </section>
