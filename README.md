@@ -13,7 +13,7 @@ git pull
 
 ## Prerrequisitos
 ```
-yarn i
+yarn install
 yarn dev
 ```
 
