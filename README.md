@@ -11,7 +11,7 @@ git remote add https://github.com/StockSensee/stock-sense.git
 git pull
 ```
 
-## Prerrequisitos
+## Prerrequisitos (instalar)
 ```
 yarn install
 yarn dev
